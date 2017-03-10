@@ -1,0 +1,94 @@
+	
+$("#PrimeTimeSearch").click(function(){
+        var brand                   = $('#search_mini_form .brand span').attr("BrandId");
+        var price_range             = $('#search_mini_form .price span').attr("PriceRangeId");
+        var style                    = $("#search_mini_form .type_select input[name='watch_model_type']:checked").val();
+		var movement_type           = $("#search_mini_form .type_select input[name='movement_type']:checked").val();
+        var url                     = "/products.html?"+"brand="+brand+"&price_range="+price_range+"&style="+style+"&movement_type="+movement_type;
+        location.href = url;
+    });
+
+$(".nav_box .choose_box .price .opt").click(function(){
+		$(this).siblings().toggle();
+	})
+	$(".nav_box .choose_box .price ul li").each(function(){
+		$(this).click(function(){
+			$(".nav_box .choose_box .price ul").hide();
+			$(this).parent().siblings().find("span").html($(this).text());
+            $(this).parent().siblings().find("span").attr("PriceRangeId",$(this).attr("PriceRangeId"));
+        })
+	});
+	$(".nav_box .choose_box .brand .opt").click(function(){
+		$(this).siblings().toggle();
+	})
+	$(".nav_box .choose_box .brand dl dd").each(function(){
+		$(this).click(function(){
+			$(".nav_box .choose_box .brand .brand_list").hide();
+			$(this).parents('.brand_list').siblings().find("span").html($(this).text());
+            $(this).parents('.brand_list').siblings().find("span").attr("BrandId",$(this).attr("BrandId"));
+        })
+	})
+
+
+
+
+<div class="line mb30">
+                    <div class="brand opt_select">
+                        <p class="opt"><span brandid="">Æ·ÅÆ</span><i></i></p>
+						                        <div class="brand_list clearer">
+                            							<dl class="brand_1">
+                                								                                            <dt>¶¥¼¶Æ·ÅÆ</dt>
+                                                                    								                                            <dd brandid="7">Å·Ã×ÇÑ</dd>
+                                                                    								                                            <dd brandid="82">ÀÍÁ¦Ê¿</dd>
+                                                                    								                                            <dd brandid="70">ÀÊ¸ñ</dd>
+                                                                    								                                            <dd brandid="6">±¦çê</dd>
+                                                                    								                                            <dd brandid="8">±¦çá</dd>
+                                                                    								                                            <dd brandid="130">²¥Íþ</dd>
+                                                                    								                                            <dd brandid="73">¿¨µØÑÇ</dd>
+                                                                    								                                            <dd brandid="120">Ïô°î</dd>
+                                                                    								                                            <dd brandid="119">·¨ÄÂÀ¼</dd>
+                                                                    								                                            <dd brandid="128">Ö¥°Ø</dd>
+                                                                    								                                            <dd brandid="5">¸ñÀ­ËÕµÙ</dd>
+                                                                    								                                            <dd brandid="72">Íò¹ú</dd>
+                                                                    								                                            <dd brandid="68">»ý¼Ò</dd>
+                                                                    								                                            <dd brandid="12">ÑÅ¿ËµÂÂÞ</dd>
+                                                                    								                                            <dd brandid="71">ÅæÄÉº£</dd>
+                                                                    								                                            <dd brandid="67">²®¾ô</dd>
+                                                                    								                                            <dd brandid="66">ÂÞ½Ü¶Å±Ë</dd>
+                                                                    								                                            <dd brandid="118">ÑÅµä</dd>
+                                                                    								                                            <dd brandid="74">½­Ê«µ¤¶Ù</dd>
+                                                                    							</dl>
+                            							<dl class="brand_2">
+                                								                                            <dt>¸ß¼¶Æ·ÅÆ</dt>
+                                                                    								                                            <dd brandid="4">ÀËÇÙ</dd>
+                                                                    								                                            <dd brandid="3">À×´ï</dd>
+                                                                    								                                            <dd brandid="83">µÛ¶æ</dd>
+                                                                    								                                            <dd brandid="69">ÃûÊ¿</dd>
+                                                                    								                                            <dd brandid="113">ÒÀ²¨Â·</dd>
+                                                                    								                                            <dd brandid="81">±¦¸ñÀö</dd>
+                                                                    								                                            <dd brandid="121">±¦ÆëÀ³</dd>
+                                                                    								                                            <dd brandid="114">¿µË¹µÇ</dd>
+                                                                    								                                            <dd brandid="127">ÉÐÎ¬É³</dd>
+                                                                    								                                            <dd brandid="115">°¬ÃÀ</dd>
+                                                                    								                                            <dd brandid="65">Íò±¦Áú</dd>
+                                                                    								                                            <dd brandid="79">ºÀÑÅ</dd>
+                                                                    								                                            <dd brandid="17">µÙÜ½Äá</dd>
+                                                                    								                                            <dd brandid="75">ÕæÁ¦Ê±</dd>
+                                                                    							</dl>
+                            							<dl class="brand_3">
+                                								                                            <dt>ÖÐ¼¶Æ·ÅÆ</dt>
+                                                                    								                                            <dd brandid="13">ÌìËó</dd>
+                                                                    								                                            <dd brandid="20">ÃÀ¶È</dd>
+                                                                    								                                            <dd brandid="19">ººÃ×¶û¶Ù</dd>
+                                                                    								                                            <dd brandid="14">Ñ©ÌúÄÉ</dd>
+                                                                    								                                            <dd brandid="16">±¦Âü</dd>
+                                                                    								                                            <dd brandid="112">Ã·»¨</dd>
+                                                                    								                                            <dd brandid="110">ºÀÀûÊ±</dd>
+                                                                    								                                            <dd brandid="111">²¨¶û</dd>
+                                                                    								                                            <dd brandid="86">Ä¦·²ÍÓ</dd>
+                                                                    								                                            <dd brandid="77">·ÒµÏ</dd>
+                                                                    							</dl>
+                                                        
+                        </div>
+                    </div>
+                </div>

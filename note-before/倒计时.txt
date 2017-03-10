@@ -1,0 +1,386 @@
+1、
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<script language="javascript" type="text/javascript"> 
+	var interval = 1000; 
+	function ShowCountDown(year,month,day,divname) 
+	{ 
+	var now = new Date(); 
+	var endDate = new Date(year, month-1, day); 
+	var leftTime=endDate.getTime()-now.getTime(); 
+	var leftsecond = parseInt(leftTime/1000); 
+	//var day1=parseInt(leftsecond/(24*60*60*6)); 
+	var day1=Math.floor(leftsecond/(60*60*24)); 
+	var hour=Math.floor((leftsecond-day1*24*60*60)/3600); 
+	var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60); 
+	var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60); 
+	var cc = document.getElementById(divname); 
+	cc.innerHTML = "脚本之家提示距离"+year+"年"+month+"月"+day+"日还有："+day1+"天"+hour+"小时"+minute+"分"+second+"秒"; 
+	} 
+	window.setInterval(function(){ShowCountDown(2010,4,20,'divdown1');}, interval); 
+
+	</script> 
+</head>
+<body>
+	<div id="divdown1"></div> 
+</body>
+</html>
+2、
+结构：
+<html>  
+    <head>  
+        <title>倒计时</title>  
+        <!--以下为css样式-->  
+        <style type= "text/css">  
+            .daojishi h2  
+            {   
+                font-family:Helvetica, Microsoft YaHei, Arial, sans-serif;   
+                font-size:14px;  
+                margin-bottom:5px;   
+                color:#151515;  
+            }  
+            .daojishi #timer  
+            {  
+                font-family:Helvetica, Microsoft YaHei, Arial, sans-serif;   
+                font-size:14px;  
+                color:#151515;  
+                font-weight:bold;  
+            }  
+        </style>  
+        <script type = "text/javascript" src = "timer.js">  
+        </script>  
+    </head>  
+    <body onload = "timer()">  
+        <div class = "daojishi">  
+            <h2>剩余时间为：</h2>  
+            <div id = "timer">  
+            </div>  
+        </div>  
+    </body>  
+</html> 
+timer.js： 
+function timer()  
+            {  
+                var ts = (new Date(2018, 11, 11, 9, 0, 0)) - (new Date());//计算剩余的毫秒数 （2018年12月11日10时） 
+                var dd = parseInt(ts / 1000 / 60 / 60 / 24, 10);//计算剩余的天数  
+                var hh = parseInt(ts / 1000 / 60 / 60 % 24, 10);//计算剩余的小时数  
+                var mm = parseInt(ts / 1000 / 60 % 60, 10);//计算剩余的分钟数  
+                var ss = parseInt(ts / 1000 % 60, 10);//计算剩余的秒数  
+                dd = checkTime(dd);  
+                hh = checkTime(hh);  
+                mm = checkTime(mm);  
+                ss = checkTime(ss);  
+                document.getElementById("timer").innerHTML = dd + "天" + hh + "时" + mm + "分" + ss + "秒";  
+                setInterval("timer()",1000);  
+            }  
+            function checkTime(i)    
+            {    
+               if (i < 10) {    
+                   i = "0" + i;    
+                }    
+               return i;    
+            }  
+
+
+3、
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>倒计时js代码 - 懒人建站 http://www.51xuediannao.com/</title>
+</head>
+
+<body>
+
+倒计时js代码 - 懒人建站 http://www.51xuediannao.com/ 整理 发布
+<DIV id="CountMsg" class="HotDate">
+    <span id="t_d">00天</span>
+    <span id="t_h">00时</span>
+    <span id="t_m">00分</span>
+    <span id="t_s">00秒</span>
+</DIV>
+<script type="text/javascript">
+    function getRTime(){
+        var EndTime= new Date('2013/05/1 10:00:00'); //截止时间 前端路上 http://www.51xuediannao.com/qd63/
+        var NowTime = new Date();
+        var t =EndTime.getTime() - NowTime.getTime();
+        /*var d=Math.floor(t/1000/60/60/24);
+        t-=d*(1000*60*60*24);
+        var h=Math.floor(t/1000/60/60);
+        t-=h*60*60*1000;
+        var m=Math.floor(t/1000/60);
+        t-=m*60*1000;
+        var s=Math.floor(t/1000);*/
+
+        var d=Math.floor(t/1000/60/60/24);
+        var h=Math.floor(t/1000/60/60%24);
+        var m=Math.floor(t/1000/60%60);
+        var s=Math.floor(t/1000%60);
+
+        document.getElementById("t_d").innerHTML = d + "天";
+        document.getElementById("t_h").innerHTML = h + "时";
+        document.getElementById("t_m").innerHTML = m + "分";
+        document.getElementById("t_s").innerHTML = s + "秒";
+    }
+    setInterval(getRTime,1000);
+    </script>
+
+
+        <!--下面只是说明与程序代码无关-->
+        <div style="width:95%;padding:50px; font-size:14px; line-height:1.75;">
+            <span>本代码由<a href="http://www.51xuediannao.com" style="color:#F00;">懒人建站网 收集整理 我要学电脑.COM →51xuediannao.com</a> </span><br>
+            <a href="http://www.51xuediannao.com/">懒人建站-jquery特效-建站素材 http://www.51xuediannao.com/</a><br/>
+    
+    <span>我们为您提供-
+    <a href="http://www.51xuediannao.com/html+css/">html+css</a>，
+    <a href="http://www.51xuediannao.com/js/">jquery特效</a>，
+    <a href="http://www.51xuediannao.com/js/">JS代码</a>，
+    <a href="http://www.51xuediannao.com/js/texiao/">网页特效</a>，
+    <a href="http://www.51xuediannao.com/js/nav/">导航菜单</a>，
+    <a href="http://www.51xuediannao.com/js/slide/">焦点幻灯片</a>，
+    <a href="http://www.51xuediannao.com/sucai/">建站素材</a>
+    </span>
+            <span>懒人建站只收录实用和能提高用户体验的代码</span>
+            <span>我们只想解放出你的部分写代码时间来思考更高层次的设计。</span>
+            </div>
+</body>
+</html>   
+
+4、
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!--暂时展示-->
+<div id="times_container"  style="border:1px solid #999999; background:#bb131a;; color:#FFFFFF; width:500px; height:40px; line-height:40px; font-size:18px; padding-left:10px; letter-spacing:4px;">
+
+         距离活动结束还有：<span id="times_day"> </span>天 
+
+                                          <span id="times_hour"> </span>时  
+
+                                          <span id="times_minute"> </span>分    
+
+                                          <span id="second"> </span>秒   
+
+</div>
+<script type="text/javascript">
+	//根据天，时，分，秒的ID找到相对应的元素
+
+var time_day = document.getElementById("times_day");
+
+var time_hour = document.getElementById("times_hour");
+
+var time_minute = document.getElementById("times_minute");
+
+var time_second = document.getElementById("second");
+
+var time_end = new Date("2015/9/17 07:00:00");  // 设定活动结束结束时间
+
+time_end = time_end.getTime();
+
+ 
+//定义倒计时函数
+var timer = setInterval(function count_down(){ 
+
+   var time_now = new Date();  // 获取当前时间
+
+   time_now = time_now.getTime();
+
+   var time_distance = time_end - time_now;  // 时间差：活动结束时间减去当前时间   
+
+   var int_day, int_hour, int_minute, int_second;   
+
+ if(time_distance >= 0){   
+
+     // 相减的差数换算成天数   
+
+     int_day = Math.floor(time_distance/86400000) //time_distance/1000/60/60/24
+
+     time_distance -= int_day * 86400000; 
+
+ // 相减的差数换算成小时
+
+        int_hour = Math.floor(time_distance/3600000) 
+
+        time_distance -= int_hour * 3600000;  
+
+// 相减的差数换算成分钟   
+
+     int_minute = Math.floor(time_distance/60000)    
+
+    time_distance -= int_minute * 60000; 
+
+ // 相减的差数换算成秒数  
+
+      int_second = Math.floor(time_distance/1000)    
+
+    // 判断小时小于10时，前面加0进行占位
+
+        if(int_hour < 10) 
+
+        int_hour = "0" + int_hour;  
+
+// 判断分钟小于10时，前面加0进行占位      
+
+  if(int_minute < 10)    
+
+   int_minute = "0" + int_minute;  
+
+ // 判断秒数小于10时，前面加0进行占位 
+
+       if(int_second < 10) 
+
+       int_second = "0" + int_second;       
+
+// 显示倒计时效果       
+
+	time_day.innerHTML = int_day;
+
+	time_hour.innerHTML = int_hour; 
+
+	time_minute.innerHTML = int_minute; 
+
+	time_second.innerHTML = int_second;
+
+    }else{
+
+	clearInterval(timer);
+
+   }
+   
+},1000)
+</script>
+</body>
+</html>
+
+5、
+结构：
+<div class="remained_time">
+		 <p>剩余时间：</p>
+		 <div class="clearer">
+			 <span class="time_d time_input">1</span><span class="">天</span>
+			 <span class="time_h time_input">11</span><span>时</span>
+			 <span class="time_m time_input">16</span><span>分</span>
+			 <span class="time_s time_input">59</span><span>秒</span>
+			 <span class="seckilling-time-remained hidden" data-remained-seconds="127253"></span>
+		 </div>
+</div>
+
+
+jq:
+<script>
+	var t = jQuery('.seckilling-time-remained1').attr('data-remained-seconds');
+	//console.log(t);
+	function countDown1(){ 
+	   var s= t--;
+	   
+	   var d=parseInt(s/86400);
+	   s%=86400;
+	   
+	   var h=parseInt(s/3600);
+	   s%=3600;
+	   
+	   var m=parseInt(s/60);
+	   s%=60;
+	   
+	   if(d > 0){
+		   jQuery('.time_d1').html(d).removeClass('hidden').next().removeClass('hidden');
+	   }
+	   jQuery('.time_h1').html(h);
+	   jQuery('.time_m1').html(m);
+	   jQuery('.time_s1').html(s);
+	}
+	countDown1();
+    timer=setInterval(countDown1,1000);
+</script>
+
+6、短信倒计时：
+
+function resetCode(){
+
+            $('.get-code').hide();
+ 
+           $('#J_second').html('60');
+
+            $('#J_resetCode').show();
+ 
+           var second = 60;
+
+            var timer = null;
+
+            timer = setInterval(function(){
+
+                second -= 1;
+
+                if(second >0 ){
+ 
+                   $('#J_second').html(second);
+
+                }else{
+ 
+                   clearInterval(timer);
+
+                    $('.get-code').show();
+
+                    $('#J_resetCode').hide();
+
+                }
+            },1000);
+
+        }
+resetCode(); //倒计时
+
+
+说明：
+new Date();
+2.参数形式有以下5种：
+
+new Date("month dd,yyyy hh:mm:ss");
+new Date("month dd,yyyy");
+new Date(yyyy,mth,dd,hh,mm,ss);
+new Date(yyyy,mth,dd);
+new Date(ms);
+
+最后一种形式，参数表示需要创建的时间和GMT时间1970年1月1日之间相差的毫秒数。
+3.各种函数的含义如下：
+
+month:用英文表示月份名称，从January到December
+
+mth:用整数表示月份，从0（1月）到11（12月）
+
+dd:表示一个月中的第几天，从1到31
+
+yyyy:四位数表示的年份
+
+hh:小时数，从0（午夜）到23（晚11点）
+
+mm:分钟数，从0到59的整数
+
+ss:秒数，从0到59的整数
+
+ms:毫秒数，为大于等于0的整数
+
+如：
+
+new Date("January 12,2006 22:19:35");
+
+new Date("January 12,2006");
+
+new Date(2006,0,12,22,19,35);
+
+new Date(2006,0,12);
+
+new Date(1137075575000);
+
+
+将字符串形式的日期转换成日期对象
+var strTime="2011-04-16"; //字符串日期格式           
+var date= new Date(Date.parse(strTime.replace(/-/g,   "/"))); //转换成Data();
+var month=date.getMonth()+1; //获取当前月份

@@ -1,0 +1,345 @@
+/*页面最多显示四个*/
+	
+	/*加载更多*/
+	var oLeft = $('.appointment .appointment_con .store_recommend .title .arr .arrL');
+	var oRight = $('.appointment .appointment_con .store_recommend .title .arr .arrR');
+	var aLi = $('.appointment .appointment_con .store_recommend .stores ul li');
+	var ok = true;
+	//alert('hello')
+	for(var i=4; i<aLi.length; i++){
+		$(aLi[i]).hide();
+	};
+
+	var remain = aLi.length%4;
+	var Integercount = aLi.length - remain;
+	var iNow = 4;
+	
+	oLeft.click(function(){
+		
+		if(iNow<=4){
+			return false;
+		}
+		var j=iNow;
+		iNow-=4;
+		for(var i=(j-4); i>=(iNow-4); i--){
+			console.log(i);
+			$(aLi[i]).show();
+		}
+		
+		for(var i=iNow;i<aLi.length;i++){
+			$(aLi[i]).hide();
+		}
+		
+		
+	});
+	
+	oRight.click(function(){
+		var j=iNow;
+		if(iNow>=aLi.length){
+			iNow = aLi.length;
+			return false;
+		}
+		iNow+=4;
+		for(var i=j; i<iNow;i++){
+			console.log(i);
+			$(aLi[i]).show();
+		}
+		for(var i=0;i<j;i++){
+			$(aLi[i]).hide();
+		}
+	});
+
+
+
+
+
+懒加载：
+(function ($) {
+    $.fn.Y_lazyload = function (options) {
+    /**
+    *   option 的默认属性说明
+    *
+    *   event           //加载img的触发事件
+    *   img             //随后加载 img 的dom
+    *   real_src        //要加载真实 src 使用到的自定义属性(attr)
+    *   animate         //动画效果
+    *   animate_delay   //动画等待时间，等待图片下载完成
+    *   animate_time    //动画执行时间
+    *   time_out        //设置延迟加载，有时IE下如果太快会有个别图片无反应的情况，设置此延时就可以解决
+    **/
+    var defaults = {
+        event : 'scroll',
+        img : 'img[real_src]',
+        real_src : 'real_src',
+        animate : "",
+        animate_delay : 500,
+        animate_time : 1000,
+        time_out : 0
+    }; 
+    var options = $.extend(defaults, options); 
+    return this.each(function(){
+        //这里写自己的方法
+        var client_h = 0;   //浏览器可视区域高
+        if (window.innerHeight) 
+            client_h = window.innerHeight; 
+        else if ((document.body) && (document.body.clientHeight)) 
+            client_h = document.body.clientHeight;
+        //封装函数，便于多次调用
+        var foreach_img = function(){
+            $(options.img).each(function(){
+                var dom = $(this);
+                //元素 offset 高
+                var offset_top = $(this).offset().top;
+                //计算出已划过的高度
+                var scroll_height = client_h + $(document).scrollTop();
+                //如果在浏览器可视内
+                if(offset_top <= scroll_height){
+                    var find_img = false;
+                     
+                    $(this).prop("src",$(this).attr(options.real_src));
+                    $(this).removeAttr(options.real_src);
+                    switch(options.animate){
+                        case 'fadeIn' : 
+                        $(this).css({"opacity":"0"}).delay(options.animate_delay).animate({"opacity":"1"},options.animate_time);break;
+                        case 'slideDown' : 
+                        $(this).css({"height":"0px","background":"url('.')"}).delay(options.animate_delay).animate({"height":$(this).height()+"px"},options.animate_time);break;
+                        default : break;
+                    }
+                 
+                    return true;    //返回重新循环
+                }
+                return false;       //退出循环
+            });
+        };
+         
+        //页面加载完就执行一次
+        setTimeout(function(){
+            foreach_img();
+        },options.time_out);
+        //绑定触发事件
+        $(this).bind(options.event,function(){
+            setTimeout(function(){foreach_img();},options.time_out);
+        });
+         
+    }); 
+    }
+})(jQuery);
+
+
+<meta charset="utf-8" />
+<script src="jquery-1.10.1.js"></script>
+<script src="Y_lazyload.js"></script>
+<style>
+    /*如果要执行slideDown动画，最好把父元素设为固定高度*/
+    li {
+        margin:150px 0;
+        height:500px;
+    }
+    img {
+        height:500px;
+        background:url("loading.gif") no-repeat center;
+    }
+</style>
+<body>
+<div>
+    <ol>
+        <li><img real_src="http://qiuxingren.com/Public/self_images/Y_lazyload1.jpg" src="blank.gif" /></li>
+        <li><img real_src="http://qiuxingren.com/Public/self_images/Y_lazyload2.jpg" src="blank.gif" /></li>
+        <li><img real_src="http://qiuxingren.com/Public/self_images/Y_lazyload3.jpg" src="blank.gif" /></li>
+        <li><img real_src="http://qiuxingren.com/Public/self_images/Y_lazyload4.jpg" src="blank.gif" /></li>
+        <li><img real_src="http://qiuxingren.com/Public/self_images/Y_lazyload5.jpg" src="blank.gif" /></li>
+        <li><img real_src="http://qiuxingren.com/Public/self_images/Y_lazyload6.jpg" src="blank.gif" /></li>
+        <li><img real_src="http://qiuxingren.com/Public/self_images/Y_lazyload7.jpg" src="blank.gif" /></li>
+        <li><img real_src="http://qiuxingren.com/Public/self_images/Y_lazyload8.jpg" src="blank.gif" /></li>
+        <li><img real_src="http://qiuxingren.com/Public/self_images/Y_lazyload9.jpg" src="blank.gif" /></li>
+        <li><img real_src="http://qiuxingren.com/Public/self_images/Y_lazyload10.jpg" src="blank.gif" /></li>
+    </ol>
+</div>
+ 
+<script type="text/javascript" charset="utf-8">
+    $(function(){
+        /**
+        *   option 的默认属性说明，进入 Y_lazyload.js 中查看注释
+        *
+        *   event           //加载img的触发事件
+        *   img             //随后加载 img 的dom
+        *   real_src        //要加载真实 src 使用到的自定义属性(attr)
+        *   animate         //动画效果
+        *   animate_delay   //动画等待时间，等待图片下载完成
+        *   animate_time    //动画执行时间
+        *   time_out        //设置延迟加载，有时IE下如果太快会有个别图片无反应的情况，设置此延时就可以解决
+        **/
+        $(window).Y_lazyload({
+            time_out : 1000
+        });
+    });
+</script>
+</body>
+
+
+懒加载：
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+        div{width:100px;height:100px;background:#F00;margin-bottom:30px}
+</style>
+</head>
+
+<body>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/001.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/002.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/003.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/004.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/040.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/005.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/006.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/007.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/008.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/009.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/010.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/011.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/012.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/013.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/014.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/015.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/016.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/017.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/018.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/019.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/020.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/021.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/022.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/023.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/024.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/025.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/026.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/027.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/028.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/029.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/030.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/031.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/032.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/033.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/034.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/035.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/036.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/037.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/038.png
+    " src="a.gif" /></div>
+    <div><img asrc="http://www.pokemon.name/w/image/Sprites/PDW/039.png
+    " src="a.gif" /></div>
+</body>
+
+<script type="text/javascript">
+        (function(){
+                //common
+                function tagName(tagName){
+                        return document.getElementsByTagName(tagName);
+                }
+                function $(id){
+                        return document.getElementById(id);
+                }
+                function addEvent(obj,type,func){
+                        if(obj.addEventListener){
+                                obj.addEventListener(type,func,false);        
+                        }else if(obj.attachEvent){
+                                obj.attachEvent('on'+type,func);
+                        }
+                }
+                
+                //建立某些参数
+                var v={
+                        eleGroup:null,
+                        eleTop:null,
+                        eleHeight:null,
+                        screenHeight:null,
+                        visibleHeight:null,
+                        scrollHeight:null,
+                        scrolloverHeight:null,
+                        limitHeight:null
+                }
+                
+                //对数据进行初始化
+                function init(element){
+                        v.eleGroup=tagName(element)
+                        screenHeight=document.documentElement.clientHeight;
+                        scrolloverHeight=document.body.scrollTop;
+                        for(var i=0,j=v.eleGroup.length;i<j;i++){
+                                if(v.eleGroup[i].offsetTop<=screenHeight && v.eleGroup[i].getAttribute('asrc')){
+                                        v.eleGroup[i].setAttribute('src',v.eleGroup[i].getAttribute('asrc'));
+                                        v.eleGroup[i].removeAttribute('asrc')
+                                }        
+                        }
+                        
+                }
+                function lazyLoad(){
+                        if(document.body.scrollTop == 0){
+                                limitHeight=document.documentElement.scrollTop+document.documentElement.clientHeight;
+                        }else{
+                                limitHeight=document.body.scrollTop+document.documentElement.clientHeight;
+                        }
+                        for(var i=0,j=v.eleGroup.length;i<j;i++){
+                                if(v.eleGroup[i].offsetTop<=limitHeight && v.eleGroup[i].getAttribute('asrc')){
+                                        v.eleGroup[i].src=v.eleGroup[i].getAttribute('asrc');
+                                        v.eleGroup[i].removeAttribute('asrc')
+                                }        
+                        }
+                }
+                init('img')
+                addEvent(window,'scroll',lazyLoad);
+        })()
+        
+        
+        
+        
+</script>
+
+</html>
+[/i][/i][/i][/i][/i][/i][/i][/i][/i][/i]
+
+
+
+插件网址：http://www.w3cways.com/1765.html

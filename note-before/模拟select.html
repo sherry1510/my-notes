@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{margin: 0; padding: 0; list-style: none;}
+	.brand{/*background: pink;*/ width: 300px; margin: 100px auto;}
+	.opt_select{width: 210px; position: relative;}
+	.opt{width: 100%; height: 35px; line-height: 35px; background: #ccc;}
+	.opt span{font-size: 14px; float: left; padding-left: 20px;}
+	.opt i{float: right; width: 35px; height: 35px; background: #be000a url(img/bg_sprite.png) no-repeat 14px -182px; cursor: pointer;}
+	.brand ul{display: none; padding: 10px 0; background: #ccc; width: 100%; position: absolute; top: 35px; left: 0; z-index: 500;}
+	.brand ul li{font-size: 14px; text-indent: 15px; height: 30px; line-height: 30px; cursor: pointer;}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$('.opt').click(function(){
+			$(this).siblings().toggle();
+		});
+
+		$('ul li').each(function() {
+			$(this).click(function(){
+				$('.opt_select ul').hide();
+				$(this).parent().siblings().find('span').html($(this).text());
+			});
+		});
+
+
+
+	})
+	</script>
+</head>
+<body>
+	<div class="brand">
+		<div class="opt_select">
+			<p class="opt">
+				<span>品牌</span>
+				<i></i>
+			</p>
+			<ul>
+				<li>欧米茄</li>
+				<li>浪琴</li>
+				<li>雷达</li>
+				<li>宝玑</li>
+				<li>宝珀</li>
+				<li>天梭</li>
+				<li>雪铁纳</li>
+				<li>蒂芙尼</li>
+				<li>汉米尔顿</li>
+				<li>美度</li>
+				<li>江诗丹顿</li>
+				<li>卡地亚</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

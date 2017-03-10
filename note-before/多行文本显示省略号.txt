@@ -1,0 +1,58 @@
+1.结构：
+
+<div class="figcaption">
+	<p>先前给大家介绍了很好用的 Colors！今天给大家介绍一款风格不同的画画软件——Fresh Paint，我们可以用它画出油画。</p>
+</div>
+    
+<div class="figcaption">
+	<p>You probably can't do it (currently?) without a fixed-width font like Courier. With a fixed-width font every letter occupies the same horizontal space, so you could probably count the letters and multiply the result with the current font size in ems or exs. Then you would just have to test how many letters fit on one line, and then break it up.</p>
+</div>
+
+样式css：
+.figcaption {
+    background: #EEE;
+    width: 410px;
+    height: 3em;
+    margin: 1em;
+}
+.figcaption p {
+    margin: 0;
+    line-height: 1.5em;
+}
+
+jq:
+$(".figcaption").each(function(i){
+    var divH = $(this).height();
+    var $p = $("p", $(this)).eq(0);
+    while ($p.outerHeight() > divH) {
+        $p.text($p.text().replace(/(\s)*([a-zA-Z0-9]+|\W)(\.\.\.)?$/, "..."));
+    };
+});
+
+2.
+p {
+    position:relative;
+    line-height:1.4em;
+    /* 3 times the line-height to show 3 lines */
+    height:4.2em;
+    overflow:hidden;
+}
+p::after {
+    content:"...";
+    font-weight:bold;
+    position:absolute;
+    bottom:0;
+    right:0;
+    padding:0 20px 1px 45px;
+    background:url(http://css88.b0.upaiyun.com/css88/2014/09/ellipsis_bg.png) repeat-y;
+}
+
+3.
+display: -webkit-box; 必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。
+-webkit-box-orient 必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式 。
+text-overflow: ellipsis;，可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。
+overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;

@@ -1,0 +1,149 @@
+1、background: url("../images/arrow.png") no-repeat scroll 0 0 / 13px 7px rgba(0, 0, 0, 0);
+
+scroll 拉动卷轴时，背景图片会跟着移动（缺省值） 
+fixed 拉动卷轴时，背景图片不会跟着移动 
+
+
+caroufredsel 参数
+
+参数列表：
+参数名     默认值     说明
+circular     true     循环模式，true为无限循环，false为单轮循环。
+infinite     true     是否启用循环，默认起用。当circular设置为false的时候，再把infinite设置为false，就可以关闭循环。
+direction     "left"     滚动方向，可选值："right", "left", "up" , "down".
+width     null     内容的宽度，如果为null，宽度自动计算
+height     null     内容的高度，如果为null，高度自动计算
+padding     0     内容区域的padding
+items     5     显示个数。默认显示5个。
+scroll     默认等于显示的个数     一次滚动个数。
+scroll:{
+    items:6,  //一次滚动6个
+    pauseOnHover:true
+}
+auto     true     是否自动播放。设置成false，不自动播放。
+prev     null     指定某一元素控制内容向前
+next     null     指定某一元素控制内容向后
+
+auto: {
+			//duration: 500,
+			timeoutDuration: 6000	//设置间隔时间
+		}
+
+
+eg:
+	$(".swiper-container ul").carouFredSel({
+				responsive: true,
+				auto: {
+					//duration: 500,
+					timeoutDuration: 6000	
+				},
+				items: {
+					visible: 1,
+					width: 300,
+					height: "63%"
+				},
+				scroll: {
+					fx: 'directscroll'
+				},
+				swipe:{
+					onTouch: true
+				},
+				pagination:".swiper-pagination"
+				});
+
+
+
+jQuery('.recommend_con ul').carouFredSel({
+					auto: false,
+					responsive: true,
+					width: '100%',
+					prev:'.prev',
+					next:'.next',
+					scroll: 2,
+					items: {
+						width: 300,
+						height: '130%',	//	optionally resize item-height
+						visible: {
+							min: 2,
+							max: 6
+						}
+					}
+				});
+		})
+
+
+1、each遍历
+
+jQuery.each(object, [callback]) 
+
+概述 
+通用例遍方法，可用于例遍对象和数组。 
+
+不同于例遍 jQuery 对象的 $().each() 方法，此方法可用于例遍任何对象。
+回调函数拥有两个参数：第一个为对象的成员或数组的索引，第二个为对应变量或内容。
+如果需要退出 each 循环可使回调函数返回 false，其它返回值将被忽略。 
+
+参数 
+objectObject 
+需要例遍的对象或数组。 
+
+callback (可选)Function 
+每个成员/元素执行的回调函数。
+
+2、取消checkbox的选中状态：
+js:
+<input type="text" name="" id="text" />
+	<input type="checkbox" name="" id="test" />
+	<script>
+	document.getElementById('test').onclick = function(){
+		var val = document.getElementById('text').value;
+		//此处为条件判断 在此处假设你的判断为上面的input输入值为123
+		//可以更换为你自己的条件
+		if(val == '123'){
+			//满足某个条件取消选中
+			this.checked = false; //取消checkbox的选中状态
+		}else{
+			//不满足某个条件依然选中
+			this.checked = true;
+		}
+		return;
+	}
+	</script>
+
+jq:
+
+$("#CheckedAll").click(function () {
+                if ($(this).is(":checked")) {
+                    $("[name=items]:checkbox").attr("checked", true);
+                } else {
+                    $("[name=items]:checkbox").attr("checked", false);
+                }
+            });
+
+第一次执行，没问题，但第二次执行就有问题了，选择不了
+
+解决办法：把attr()换成prop()
+$("#CheckedAll").click(function () {
+                if ($(this).is(":checked")) {
+                    $("[name=items]:checkbox").prop("checked", true);
+                } else {
+                    $("[name=items]:checkbox").prop("checked", false);
+                }
+            });
+
+
+
+3.返回顶部：
+ $(window).scroll(function(){
+        if ($(window).scrollTop()>100){
+            $("#back-to-top").fadeIn(1500);
+        }
+        else{
+            $("#back-to-top").fadeOut(1500);
+        }
+     });
+	 
+	 $("#back-to-top").click(function(){
+        $('body,html').animate({scrollTop:0});
+            return false;
+     });

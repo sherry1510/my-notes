@@ -1,0 +1,28 @@
+关于link标签中的media:
+
+eg:  <link href="css.css" rel="stylesheet" type="text/css" media="screen" />
+     <link type="text/css" rel="stylesheet" href="printstyle.css" media="print" />
+上面的代码意思是说，当不打印的时候，使用media="screen"来显示网页，当打印的时候就调用printstyle.css来显示网页，
+
+为了方便，这里给出media的所有参数及含义，方便你使用：
+
+screen 计算机屏幕（默认）。 
+tty 电传打字机以及类似的使用等宽字符网格的媒介。 
+tv 电视机类型设备（低分辨率、有限的滚屏能力）。 
+projection 放映机。 
+handheld 手持设备（小屏幕、有限带宽）。 
+print 打印预览模式/打印页面。 
+braille 盲人点字法反馈设备。 
+aural 语音合成器。 
+all 适用于所有设备。 
+
+
+//竖屏时使用的样式 
+<style media="all and (orientation:portrait)" type="text/css">
+#landscape { display: none; }
+</style>
+ 
+//横屏时使用的样式 
+<style media="all and (orientation:landscape)" type="text/css">
+#portrait { display: none; }
+</style>  

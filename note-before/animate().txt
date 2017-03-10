@@ -1,0 +1,43 @@
+当使用 animate() 时，必须使用 Camel 标记法书写所有的属性名，比如，必须使用 paddingLeft 而不是 padding-left，使用 marginRight 而不是 margin-right，等等。
+
+
+jQuery animate() - 使用相对值
+也可以定义相对值（该值相对于元素的当前值）。需要在值的前面加上 += 或 -=：
+实例
+$("button").click(function(){
+  $("div").animate({
+    left:'250px',
+    height:'+=150px',
+    width:'+=150px'
+  });
+});
+
+jQuery animate() - 使用预定义的值
+您甚至可以把属性的动画值设置为 "show"、"hide" 或 "toggle"：
+实例
+$("button").click(function(){
+  $("div").animate({
+    height:'toggle'
+  });
+});
+
+jQuery animate() - 使用队列功能
+默认地，jQuery 提供针对动画的队列功能。
+这意味着如果您在彼此之后编写多个 animate() 调用，jQuery 会创建包含这些方法调用的“内部”队列。然后逐一运行这些 animate 调用。
+实例 1
+隐藏，如果您希望在彼此之后执行不同的动画，那么我们要利用队列功能：
+$("button").click(function(){
+  var div=$("div");
+  div.animate({height:'300px',opacity:'0.4'},"slow");
+  div.animate({width:'300px',opacity:'0.8'},"slow");
+  div.animate({height:'100px',opacity:'0.4'},"slow");
+  div.animate({width:'100px',opacity:'0.8'},"slow");
+});
+
+实例 2
+下面的例子把 <div> 元素移动到右边，然后增加文本的字号：
+$("button").click(function(){
+  var div=$("div");
+  div.animate({left:'100px'},"slow");
+  div.animate({fontSize:'3em'},"slow");
+});

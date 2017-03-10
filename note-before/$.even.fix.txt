@@ -1,0 +1,61 @@
+例子：$('a.seckilling-ajax-tab').click(function(e){
+	e =$.event.fix(e);
+        e.preventDefault();
+}）
+
+
+
+利用jQuery的$.event.fix函数统一浏览器event事件处理的差异
+比如得到触发事件的元素引用在IE浏览器下是：event.srcElement，在FF浏览器下则是：event.target，另外又比如在FF浏览器下得到光标相对页面的位置是event.pageX，而IE浏览器下的处理方式又是不一样的，当然还有一些像“阻止事件冒泡”以及“取消浏览器默认行为”等，不同浏览器也有不同的处理方式，如果我们要使JavaScript在不同的浏览器下能正常处理事件代码，就要分别进行判断处理。现在jQuery为我们提供了统一兼容处理函数$.event.fix(e)
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>利用jQuery的$.event.fix函数统一浏览器event处理</title>
+
+<script type="text/javascript" src="http://img.jb51.net/jslib/jquery/jquery.js"></script>
+
+</head>
+
+<body>
+
+<input type="button" value="点击我吧" onclick="eventHandler(event)" />
+
+<script type="text/javascript">
+
+//请使用不同浏览器测试本页，你将看到一样的结果
+
+function eventHandler(e)
+
+{
+
+var event = $.event.fix(e);
+
+var elem = event.target;
+
+alert('当前点击对象的标签名是:' + elem.tagName);
+
+alert('当前点击按钮文本是:' + elem.value);
+
+alert('pageX:' + event.pageX + ',pageY:' + event.pageY);
+
+//得到按键码
+
+event.keyCode
+
+//取消浏览器默认行为
+
+event.preventDefault();
+
+//取消事件冒泡
+
+event.stopPropagation();
+
+//...还有好些不是很常用属性，这里不一一列举
+
+}
+
+</script>
+
+</body>

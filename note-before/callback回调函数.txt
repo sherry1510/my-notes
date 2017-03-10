@@ -1,0 +1,9 @@
+如果您希望在一个涉及动画的函数之后来执行语句，请使用 callback 函数（回调函数）
+例如：
+
+  $("p").hide(1000,function(){
+    alert("The paragraph is now hidden");
+    });
+ p隐藏之后再执行回调函数alert();
+如果一个动画
+

@@ -1,0 +1,376 @@
+<!-- Baidu Button BEGIN --><div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare"><span class="bds_more">分享到：</span><a class="bds_qzone"></a><a class="bds_tsina"></a><a class="bds_tqq"></a><a class="bds_renren"></a><a class="bds_t163"></a><a class="shareCount"></a></div><script type="text/javascript" id="bdshare_js" data="type=tools&uid=2733582" ></script><script type="text/javascript" id="bdshell_js"></script><script type="text/javascript">document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)</script><!-- Baidu Button END -->
+
+
+网址：http://www.ecmoban.com/goods-185.html
+http://share.baidu.com/code
+	http://bbs.ecmoban.com/forum.php?mod=viewthread&tid=348
+
+http://share.baidu.com/code/advance
+
+
+/*
+页面分享功能
+图片分享功能
+划词分享功能*/
+
+<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+/*页面侧边显示分享*/
+<div class="bdsharebuttonbox" data-tag="share_1">
+	<a class="bds_mshare" data-cmd="mshare"></a>
+	<a class="bds_qzone" data-cmd="qzone" href="#"></a>
+	<a class="bds_tsina" data-cmd="tsina"></a>
+	<a class="bds_baidu" data-cmd="baidu"></a>
+	<a class="bds_renren" data-cmd="renren"></a>
+	<a class="bds_tqq" data-cmd="tqq"></a>
+	<a class="bds_more" data-cmd="more">更多</a>
+	<a class="bds_count" data-cmd="count"></a>
+</div>
+<script>
+	window._bd_share_config = {
+		common : {
+			bdText : '自定义分享内容',	
+			bdDesc : '自定义分享摘要',	
+			bdUrl : '自定义分享url地址', 	
+			bdPic : '自定义分享图片'
+		},
+		share : [{
+			"bdSize" : 16
+		}],
+		slide : [{	   
+			bdImg : 0,
+			bdPos : "right",
+			bdTop : 100
+		}],
+		image : [{
+			viewType : 'list',
+			viewPos : 'top',
+			viewColor : 'black',
+			viewSize : '16',
+			viewList : ['qzone','tsina','huaban','tqq','renren']
+		}],
+		selectShare : [{
+			"bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
+		}]
+	}
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+
+
+参考文档：
+
+一、概述
+百度分享代码已升级到2.0，本页将介绍新版百度分享的安装配置方法，请点击左侧列表查看相关章节。
+
+二、代码结构
+分享代码可以分为三个部分：HTML、设置和js加载，示例如下：
+
+代码结构如下：
+
+<div class="bdsharebuttonbox" data-tag="share_1">
+	<!-- 此处添加展示按钮 -->
+</div>
+<script>
+	window._bd_share_config = {
+	//此处添加分享具体设置
+	}
+
+	//以下为js加载部分
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+三、按钮标签
+按钮标签代码
+
+<div class="bdsharebuttonbox" data-tag="share_1">
+	<a class="bds_mshare" data-cmd="mshare"></a>
+	<a class="bds_qzone" data-cmd="qzone" href="#"></a>
+	<a class="bds_tsina" data-cmd="tsina"></a>
+	<a class="bds_weixin" data-cmd="weixin"></a>
+	<a class="bds_baidu" data-cmd="baidu"></a>
+	<a class="bds_renren" data-cmd="renren"></a>
+	<a class="bds_tqq" data-cmd="tqq"></a>
+	<a class="bds_more" data-cmd="more">更多</a>
+	<a class="bds_count" data-cmd="count"></a>
+</div>
+说明：
+
+只有普通页面分享需要按钮标签。划词分享、图片分享无需添加HTML结构。
+
+HTML结构可以放在body的任意位置，可复制多份。
+
+class＝"bdsharebuttonbox" 部分为dom选择器，请勿改动。
+
+data-tag属性为分享按钮标识，用于实现同一页面中多分享按钮不同配置，详见设置部分。
+
+data-cmd属性为分享目标标识，取值请参见：分享媒体id对应表。此外值为more时点击展现更多弹窗，值为count时展现分享数。
+
+HTML代码中其他部分均可自定义。
+
+四、自定义设置
+设置部分结构如下，如不需要某项功能，删除相应的配置项即可。
+
+设置：
+
+<script>
+	window._bd_share_config = {
+		common : {
+			//此处放置通用设置
+		},
+		share : [
+			//此处放置分享按钮设置
+		],
+		slide : [
+			//此处放置浮窗分享设置
+		],
+		image : [
+			//此处放置图片分享设置
+		],
+		selectShare : [
+			//此处放置划词分享设置
+		]
+	}
+</script>
+4.1 通用设置
+
+通用设置将作用于所有分享类型，可将通用设置放于此处，如分享内容、分享url等。
+
+通用设置
+
+<script>
+	window._bd_share_config = {
+		common : {		
+			bdText : '',	
+			bdDesc : '',	
+			bdUrl : '', 	
+			bdPic : '',		
+			...
+		}
+	}
+</script>
+通用设置项解析：
+
+配置项名称	值类型	格式和取值	描述
+bdText	string	自定义	分享的内容
+bdDesc	string	自定义	分享的摘要
+bdUrl	string	自定义	分享的Url地址
+bdPic	string	自定义	分享的图片
+bdSign	string	on｜off｜normal	是否进行回流统计。
+'on': 默认值，使用正常方式挂载回流签名（#[数字签名]）
+'off': 关闭数字签名，不统计回流量
+'normal': 使用&符号连接数字签名，不破坏原始url中的#锚点
+bdMini	int	1｜2｜3	下拉浮层中分享按钮的列数
+bdMiniList	array	['qzone','tsina',...]	自定义下拉浮层中的分享按钮类型和排列顺序。详见分享媒体id对应表
+onBeforeClick	function	function(cmd,config){}	在用户点击分享按钮时执行代码，更改配置。
+cmd为分享目标id，config为当前设置，返回值为更新后的设置。
+onAfterClick	function	function(cmd){}	在用户点击分享按钮后执行代码，cmd为分享目标id。可用于统计等。
+bdPopupOffsetLeft	int	正｜负数	下拉浮层的y偏移量
+bdPopupOffsetTop	int	正｜负数	下拉浮层的x偏移量
+4.2 分享按钮设置
+
+分享按钮设置的值为数组或对象，值为数组时可对多个分享按钮应用不同的设置。
+
+分享按钮设置
+
+<script>
+	window._bd_share_config = {
+		share : [{
+			"tag" : "share_1",
+			"bdSize" : 32,
+			...
+		},{
+			"tag" : "share_2",
+			"bdSize" : 16,
+			...
+		}]
+	}
+</script>
+分享按钮配置项解析：
+
+配置项名称	值类型	格式和取值	描述
+tag	string	与data-tag一致	表示该配置只会应用于data-tag值一致的分享按钮。
+如果不设置tag，该配置将应用于所有分享按钮。
+bdSize	int	16｜24｜32	分享按钮的尺寸
+bdCustomStyle	string	样式文件地址	自定义样式，引入样式文件
+4.3 浮窗分享设置
+
+浮窗分享设置的值为数组或对象，值为数组时可在页面显示多个分享浮窗。
+
+浮窗分享设置
+
+<script>
+	window._bd_share_config = {
+		slide : [{	   
+			bdImg : 0,
+			bdPos : "right",
+			bdTop : 100
+		},{
+			bdImg : 0,
+			bdPos : "left",
+			bdTop : 100
+		}]
+	}
+</script>
+浮窗分享设置项解析：
+
+配置项名称	值类型	格式和取值	描述
+bdImg	string	0｜1｜2｜3｜4｜5｜6｜7｜8	分享浮窗图标的颜色。
+bdPos	string	left｜right	分享浮窗的位置
+bdTop	int		分享浮窗与可是区域顶部的距离(px)
+4.4 图片分享设置
+
+图片分享设置的值为数组或对象，值为数组时可对图片应用不同的设置。
+
+图片分享设置
+
+<script>
+	window._bd_share_config = {
+		image : [{
+			"tag" : "img_1",
+			viewType : 'list',
+			viewPos : 'top',
+			viewColor : 'black',
+			viewSize : '16',
+			viewList : ['qzone','tsina','huaban','tqq','renren']
+		},{
+			"tag" : "img_2",
+			viewType : 'list',
+			viewPos : 'top',
+			viewColor : 'black',
+			viewSize : '16',
+			viewList : ['qzone','tsina','huaban','tqq','renren']
+		}]
+	}
+</script>
+图片分享设置项解析：
+
+配置项名称	值类型	格式和取值	描述
+tag	string	与data-tag一致	表示该配置只会应用于data-tag值一致的图片。如果不设置tag，该配置将应用于所有图片。
+viewType	string	list｜collection	图片分享按钮样式。
+viewPos	string	top｜bottom	图片分享展示层的位置。
+viewColor	string	black｜white	图片分享展示层的背景颜色。
+viewSize	int	16｜24｜32	图片分享展示层的图标大小。
+viewList	array	['qzone','tsina',...]	自定义展示层中的分享按钮类型和排列顺序。详见分享媒体id对应表
+4.5 划词分享设置
+
+划词分享设置
+
+<script>
+	window._bd_share_config = {
+		selectShare : [{
+			"bdSelectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf'],
+			"bdContainerClass" : "容器class名"
+		}]
+	}
+</script>
+图片分享设置项解析：
+
+配置项名称	值类型	格式和取值	描述
+bdSelectMiniList	array	['qzone','tsina',...]	自定义弹出浮层中的分享按钮类型和排列顺序。详见分享媒体id对应表
+bdContainerClass	string	myclassname	自定义划词分享的激活区域
+五、引入javascript
+加载js
+
+<script>
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+说明：
+
+请将代码放于</body>之前。
+
+六、完整示例代码
+完整代码如下，请根据自身情况修改。
+
+完整示例代码
+
+<div class="bdsharebuttonbox" data-tag="share_1">
+	<a class="bds_mshare" data-cmd="mshare"></a>
+	<a class="bds_qzone" data-cmd="qzone" href="#"></a>
+	<a class="bds_tsina" data-cmd="tsina"></a>
+	<a class="bds_baidu" data-cmd="baidu"></a>
+	<a class="bds_renren" data-cmd="renren"></a>
+	<a class="bds_tqq" data-cmd="tqq"></a>
+	<a class="bds_more" data-cmd="more">更多</a>
+	<a class="bds_count" data-cmd="count"></a>
+</div>
+<script>
+	window._bd_share_config = {
+		common : {
+			bdText : '自定义分享内容',	
+			bdDesc : '自定义分享摘要',	
+			bdUrl : '自定义分享url地址', 	
+			bdPic : '自定义分享图片'
+		},
+		share : [{
+			"bdSize" : 16
+		}],
+		slide : [{	   
+			bdImg : 0,
+			bdPos : "right",
+			bdTop : 100
+		}],
+		image : [{
+			viewType : 'list',
+			viewPos : 'top',
+			viewColor : 'black',
+			viewSize : '16',
+			viewList : ['qzone','tsina','huaban','tqq','renren']
+		}],
+		selectShare : [{
+			"bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
+		}]
+	}
+	with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+七、分享媒体id对应表
+分享媒体id对应表
+
+名称	ID
+一键分享	mshare
+QQ空间	qzone
+新浪微博	tsina
+人人网	renren
+腾讯微博	tqq
+百度相册	bdxc
+开心网	kaixin001
+腾讯朋友	tqf
+百度贴吧	tieba
+豆瓣网	douban
+搜狐微博	tsohu
+百度新首页	bdhome
+QQ好友	sqq
+和讯微博	thx
+百度云收藏	bdysc
+美丽说	meilishuo
+蘑菇街	mogujie
+点点网	diandian
+花瓣	huaban
+堆糖	duitang
+和讯	hx
+飞信	fx
+有道云笔记	youdao
+麦库记事	sdo
+轻笔记	qingbiji
+人民微博	people
+新华微博	xinhua
+邮件分享	mail
+我的搜狐	isohu
+摇篮空间	yaolan
+若邻网	wealink
+天涯社区	ty
+Facebook	fbook
+Twitter	twi
+linkedin	linkedin
+复制网址	copy
+打印	print
+百度个人中心	ibaidu
+微信	weixin
+股吧	iguba
+八、工具
+检测分享代码版本
+
+	//打开已安装分享代码的页面，在控制台中执行：
+	javascript:b=(window.bdShare||window._bd_share_main);alert(b?'\u5F53\u524D\u9875\u9762\u7684\u5206\u4EAB\u4EE3\u7801\u7248\u672C\u4E3A\uFF1A'+(b.version||'1.0'):'\u5F53\u524D\u9875\u9762\u6CA1\u6709\u5B89\u88C5\u5206\u4EAB\u4EE3\u7801\u3002')

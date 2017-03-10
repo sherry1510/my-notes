@@ -1,0 +1,14 @@
+1、文本阴影：text-shadow: 1px 1px 1px #fff;
+2、backface-visibility 属性：
+  backface-visibility 属性定义当元素不面向屏幕时是否可见。
+  如果在旋转元素不希望看到其背面时，该属性很有用。
+语法：backface-visibility: visible|hidden;
+实例
+隐藏被旋转的 div 元素的背面：
+div
+{
+backface-visibility:hidden;
+-webkit-backface-visibility:hidden;	/* Chrome 和 Safari */
+-moz-backface-visibility:hidden; 	/* Firefox */
+-ms-backface-visibility:hidden; 	/* Internet Explorer */
+}

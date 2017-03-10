@@ -1,0 +1,9 @@
+
+IE:
+_nowamagic:1px;-----------ie6
+*nowamagic:1px;-----------ie7
+nowamagic:1px\0;----------ie89
+nowamagic:1px\9\0;--------ie9
+:root nowamagic:1px;    ----ie9(实际情况可能ie9还是有问题，再用这种方式)
+
+

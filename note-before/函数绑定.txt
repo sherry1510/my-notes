@@ -1,0 +1,59 @@
+1、<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>智能社— http://www.zhinengshe.com</title>
+<style>
+	*{margin:0; border:0;}
+</style>
+</head>
+<body>
+	<div id="box" style="width:300px; height:300px; background:red; overflow:hidden;">
+		<div id="cen" style="width:200px; height:200px; background:blue; margin:50px;  overflow:hidden;">
+			<div id="con" style="width:100px; height:100px; background:yellow; margin:50px;"></div>
+		</div>
+	</div>
+</body>
+<script>
+	//obj.attachEvent(type,fn); 
+	//obj.detachEvent(event,fu); 
+	//obj.removeEventListener(event,fn,布尔值); 
+	//就是有上下级关系的元素，同时做了一件事情；
+	//子集做的时候，父级会自动做；
+	//true 和 false 代表 事件流执行的顺序，
+	//true 3<2<1;
+	//false 1<2<3;
+	//解绑定不了匿名函数；
+	//只能解绑定有名的函数；
+	var oBox = document.querySelector('#box');
+	var oCen = document.querySelector('#cen');
+	var oCon = document.querySelector('#con');
+	
+	oCon.addEventListener('click',function (){
+			alert(this.style.background);
+	},true);
+	
+	oCen.addEventListener('click',function (){
+			alert(this.style.background);
+	},true);
+	oBox.addEventListener('click',function (){
+			alert(this.style.background);
+	},true);
+	
+	//
+</script>
+</html>
+
+
+
+
+2、<script>
+	//假如别人写了代码，你找不到，但是你又要加代码，在同一个元素上，就只能绑定来实现。
+	document.onclick = function (){
+		alert(1);
+	};
+	
+	document.addEventListener('click',function (){
+		alert(2);
+	},false);
+</script>

@@ -1,0 +1,5 @@
+body,p,img,ul,li,ol,dl,dt,dd,h1,h2,h3,h4,span,input,div{margin:0; padding:0; list-style:none; border:0;}
+img{display:block;}
+body{ color:#414141; font-size:12px; font-family:"ËÎÌו";}
+a{ color:#a6e2ff; text-decoration:none;}
+a:hover{ color:#feffff;}

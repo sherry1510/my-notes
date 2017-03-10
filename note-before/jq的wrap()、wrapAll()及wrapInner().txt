@@ -1,0 +1,27 @@
+<p>我是占位置的。</p>
+<p>我是占位置的。</p>
+1、wrap()方法
+$("p").wrap("<strong></strong>");
+结果：
+<strong>
+  <p>我是占位置的。</p>	
+</strong>
+<strong>
+  <p>我是占位置的。</p>	
+</strong>
+可以看出strong标签包围了每个匹配的p标签。
+
+2、wrapAll()方法
+$("p").wrapAll("<strong></strong>");
+<strong>
+  <p>我是占位置的。</p>	
+  <p>我是占位置的。</p>	
+</strong>
+可以看出strong标签把全部匹配的p标签一下子全都包围了。
+
+3、wrapInner()方法
+$("p").wrapInner("<strong></strong>");
+
+<p><strong>我是占位置的。</strong></p>
+<p><strong>我是占位置的。</strong></p>
+可以看出strong标签内嵌入每个匹配的p标签里面。

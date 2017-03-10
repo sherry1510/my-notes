@@ -1,0 +1,17 @@
+1、首先在页面的head部分加入如下脚本
+
+<script src="http://api.html5media.info/1.1.4/html5media.min.js"></script>
+
+你可以通过使用IE条件注释的方法，只在旧版IE浏览器中加载这条JS脚本。
+
+2、然后再使用audio或video添加音频视频就行了
+
+<!-- 视频媒体标签 -->
+
+<video src="iefans.net.mp4" width="320" height="200" controls preload></video>
+
+<!-- 音频媒体标签 -->
+
+<audio src="iefans.net.mp3" controls preload></audio>
+
+这样你便可以在IE8，甚至老掉牙的IE6浏览器中使用audio和video标签了。

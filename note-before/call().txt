@@ -1,0 +1,24 @@
+函数调用：
+
+function fn1（）{
+	alert(this)
+};
+
+fn1();//调用函数  this指向window
+fn1.call();//调用函数  fn1()==fn1.call()
+
+call()方法的第一个参数可以改变函数执行过程中的内部this的指向
+eg:call(1)  //this指向由window变为1
+
+call()方法的第二个参数开始就是原来函数的参数列表
+eg:下面call()的第二个参数指向fn1的a,call()的第三个参数指向fn1的b
+function fn1（a,b）{
+	alert(this);
+	alert(a + b);
+};
+
+fn1.call(1,10,20);  //a=10;b=20
+
+
+如果不想改变函数中的this指向，可以将call()的第一个参数设为null，即：fn1.call(null,10,20); //此时
+this仍然指向window，而不是null.也就是说null不改变this的指向

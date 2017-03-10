@@ -1,0 +1,890 @@
+方法一：
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Insert title here</title>
+<script type="text/javascript">
+function CharMode(ch){
+   if (ch>=48 && ch <=57) //数字   
+    return 1;   
+   if (ch>=65 && ch <=90) //大写字母   
+    return 2;   
+   if (ch>=97 && ch <=122) //小写   
+    return 4;   
+   else   
+    return 8; //特殊字符 
+}
+function bitTotal(num){
+   var modes=0;   
+   for (i=0;i<4;i++){ 
+    if (num & 1) modes++;   
+    num>>>=1;   
+   }   
+   return modes;
+}
+function checkStrong(pwd){ //返回密码的强度级别 
+   if(pwd.length < 6)
+    return 0;
+   var Modes=0;   
+   for (i=0;i<pwd.length;i++){   
+    //测试每一个字符的类别并统计一共有多少种模式. 
+    Modes |= CharMode(pwd.charCodeAt(i)); 
+   }   
+   return bitTotal(Modes); 
+}
+function pwStrength(pwd){
+   var O_color="#eeeeee";   
+   var L_color="#FF0000";   
+   var M_color="#FF9900";   
+   var H_color="#33CC00";   
+   if (pwd==null||pwd==''){   
+    Lcolor=Mcolor=Hcolor=O_color;   
+   }else {
+    var S_level=checkStrong(pwd); 
+    switch(S_level) {   
+     case 0:   
+      Lcolor=Mcolor=Hcolor=O_color;
+     case 1:   
+      Lcolor=L_color;   
+      Mcolor=Hcolor=O_color;   
+      break;   
+     case 2:   
+      Lcolor=Mcolor=M_color;   
+      Hcolor=O_color;   
+      break;   
+     default:   
+      Lcolor=Mcolor=Hcolor=H_color;   
+    } 
+   } 
+   document.getElementById("strength_L").style.background=Lcolor;   
+   document.getElementById("strength_M").style.background=Mcolor;   
+   document.getElementById("strength_H").style.background=Hcolor;   
+   return; 
+} 
+</script>
+</head>
+<body>
+   <form name=form1 action="" >   
+   输入密码: 
+   <input type=password size=30 maxlength="20" onKeyUp=pwStrength(this.value) onBlur=pwStrength(this.value)>
+   <br>密码强度:   
+   <table width="217" border="1" cellspacing="0" cellpadding="1" bordercolor="#cccccc" height="23" style='display:inline'>   
+    <tr align="center" bgcolor="#eeeeee">   
+     <td width="33%" id="strength_L">弱</td>   
+     <td width="33%" id="strength_M">中</td>   
+     <td width="33%" id="strength_H">强</td>   
+    </tr>   
+   </table> 
+   </form><hr/>
+   <div id="num"></div>
+</body>
+</html>
+
+
+方法二：
+
+结构：
+ <form name="form1" action="">
+     密码:<input type="password" size="8" onkeyup="pwStrength(this.value)" onblur="pwStrength(this.value)">
+    <br>
+    密码强度:
+     <table width="220px" border="1" cellspacing="0" cellpadding="1" bordercolor="#eeeeee" height="22px">
+         <tr align="center" bgcolor="#f5f5f5">
+             <td width="33%" id="strength_L">弱</td>
+             <td width="33%" id="strength_M">中</td>
+             <td width="33%" id="strength_H">强</td>
+         </tr>
+     </table>
+ </form>
+js:
+function pwdStrength(pwd) {
+ 2     O_color = "#eeeeee";
+ 3     L_color = "#FF0000";
+ 4     M_color = "#FF9900";
+ 5     H_color = "#33CC00";
+ 6     var level = 0, strength = "O";
+ 7     if (pwd == null || pwd == '') {
+ 8         strength = "O";
+ 9         Lcolor = Mcolor = Hcolor = O_color;
+10     }
+11     else {
+12         var mode = 0;
+13         if (pwd.length <= 4)
+14             mode = 0;
+15         else {
+16             for (i = 0; i < pwd.length; i++) {
+17                 var charMode, charCode;
+18                 charCode = pwd.charCodeAt(i);
+19                 // 判断输入密码的类型
+20                 if (charCode >= 48 && charCode <= 57) //数字  
+21                     charMode = 1;
+22                 else if (charCode >= 65 && charCode <= 90) //大写  
+23                     charMode = 2;
+24                 else if (charCode >= 97 && charCode <= 122) //小写  
+25                     charMode = 4;
+26                 else
+27                     charMode = 8;
+28                 mode |= charMode;
+29             }
+30             // 计算密码模式
+31             level = 0;
+32             for (i = 0; i < 4; i++) {
+33                 if (mode & 1)
+34                     level++;
+35                 mode >>>= 1;
+36             }
+37         }
+38         switch (level) {
+39             case 0:
+40                 strength = "O";
+41                 Lcolor = Mcolor = Hcolor = O_color;
+42                 break;
+43             case 1:
+44                 strength = "L";
+45                 Lcolor = L_color;
+46                 Mcolor = Hcolor = O_color;
+47                 break;
+48             case 2:
+49                 strength = "M";
+50                 Lcolor = Mcolor = M_color;
+51                 Hcolor = O_color;
+52                 break;
+53             default:
+54                 strength = "H";
+55                 Lcolor = Mcolor = Hcolor = H_color;
+56                 break;
+57         }
+58     }
+59     document.getElementById("strength_L").style.background = Lcolor;
+60     document.getElementById("strength_M").style.background = Mcolor;
+61     document.getElementById("strength_H").style.background = Hcolor;
+62     return strength;
+63 }
+
+方法三：（不太好）
+
+<html> 
+<head> 
+<script type="text/javascript"> 
+ function checkStrong(sPW){ 
+  if (sPW.length<=4){
+   Modes=1; 
+  }else if(sPW.length<=13){
+   Modes=2;
+  }else{
+   Modes = 0;
+  }
+  return Modes; 
+ } 
+
+ function pwStrength(pwd){ 
+  O_color="#eeeeee"; 
+  L_color="#FF0000"; 
+  M_color="#FF9900"; 
+  H_color="#33CC00"; 
+  if (pwd==null||pwd==""){ 
+   Lcolor=Mcolor=Hcolor=O_color; 
+  } else{ 
+   S_level=checkStrong(pwd); 
+   switch(S_level) { 
+    case 0: 
+     Lcolor=Mcolor=Hcolor=L_color; 
+     break;
+    case 1: 
+     Lcolor=L_color; 
+     Mcolor=Hcolor=O_color; 
+     break; 
+    case 2:
+     Lcolor=Mcolor=L_color;
+     Hcolor=O_color;
+     break;
+    default: 
+    Lcolor=Mcolor=Hcolor=H_color; 
+     break;
+  } 
+  
+  document.getElementById("strength_L").style.backgroundColor=Lcolor;
+  document.getElementById("strength_M").style.backgroundColor=Mcolor;
+  document.getElementById("strength_H").style.backgroundColor=Hcolor;
+  /*
+  document.t1.strength_L.style.backgroud=Lcolor; 
+  document.t1.strength_M.style.backgroud=Mcolor; 
+  document.t1.strength_H.style.backgroud=Hcolor; 
+  */
+  } 
+ }
+
+</script> 
+</head> 
+
+<body> 
+<form name="form1" action="" > 
+输入密码:<input type="password" size="10" onBlur="pwStrength(this.value)"> 
+<label/> 
+<input type="text" name="textfield" id="textfield" /> 
+</label> 
+<br>密码强度: 
+ <table id="t1" width="217" border="1" cellspacing="0" cellpadding="1" bordercolor="#cccccc" height="23" style='display:inline'> 
+  <tr align="center" bgcolor="#eeeeee"> 
+   <td width="33%" id="strength_L">弱</td> 
+   <td width="33%" id="strength_M">中</td> 
+   <td width="33%" id="strength_H">强</td> 
+  </tr> 
+ </table> 
+</form> 
+</body> 
+</html>
+
+方法四：
+
+结构： 
+<!DOCTYPE HTML> 
+<html lang="en"> 
+<head> 
+<meta charset="utf-8"/> 
+<title>密码强度</title> 
+<style type="text/css"> 
+#passStrength{height:6px;width:120px;border:1px solid #ccc;padding:2px;} 
+.strengthLv1{background:red;height:6px;width:40px;} 
+.strengthLv2{background:orange;height:6px;width:80px;} 
+.strengthLv3{background:green;height:6px;width:120px;} 
+</style> 
+</head> 
+<body> 
+<input type="password" name="pass" id="pass" maxlength="16"/> 
+<div class="pass-wrap"> 
+<em>密码强度：</em> 
+<div id="passStrength"></div> 
+</div> 
+</body> 
+</html> 
+<script type="text/javascript" src="js/passwordStrength.js"></script> 
+<script type="text/javascript"> 
+new PasswordStrength('pass','passStrength'); 
+</script> 
+js:
+ 
+function PasswordStrength(passwordID,strengthID){ 
+this.init(strengthID); 
+var _this = this; 
+document.getElementById(passwordID).onkeyup = function(){ 
+_this.checkStrength(this.value); 
+} 
+}; 
+PasswordStrength.prototype.init = function(strengthID){ 
+var id = document.getElementById(strengthID); 
+var div = document.createElement('div'); 
+var strong = document.createElement('strong'); 
+this.oStrength = id.appendChild(div); 
+this.oStrengthTxt = id.parentNode.appendChild(strong); 
+}; 
+PasswordStrength.prototype.checkStrength = function (val){ 
+var aLvTxt = ['','低','中','高']; 
+var lv = 0; 
+if(val.match(/[a-z]/g)){lv++;} 
+if(val.match(/[0-9]/g)){lv++;} 
+if(val.match(/(.[^a-z0-9])/g)){lv++;} 
+if(val.length < 6){lv=0;} 
+if(lv > 3){lv=3;} 
+this.oStrength.className = 'strengthLv' + lv; 
+this.oStrengthTxt.innerHTML = aLvTxt[lv]; 
+}; 
+
+
+方法五：
+js:
+function getStrength(passwd){  
+    intScore = 0;  
+    if (passwd.match(/[a-z]/)) // [验证]至少一个小写字母  
+    {  
+        intScore = (intScore+1)  
+    } if (passwd.match(/[A-Z]/)) // [验证]至少一个大写字母  
+    {  
+        intScore = (intScore+5)  
+    } // 单一验证  
+    if (passwd.match(//d+/)) // [验证]至少一个数字  
+    {  
+        intScore = (intScore+5)  
+    } if (passwd.match(/(/d.*/d.*/d)/)) // [验证]至少三个数字  
+    {  
+        intScore = (intScore+5)  
+    } // 特殊字符验证  
+    if (passwd.match(/[!,@#$%^&*?_~]/)) // [验证]至少一个特殊字符  
+    {  
+        intScore = (intScore+5)  
+    } if (passwd.match(/([!,@#$%^&*?_~].*[!,@#$%^&*?_~])/)) // [验证]至少两个特殊字符  
+    {  
+        intScore = (intScore+5)  
+    } // 复合验证  
+    if (passwd.match(/[a-z]/) && passwd.match(/[A-Z]/)) // [验证]同时包含大写和小写  
+    {  
+        intScore = (intScore+2)  
+    } if (passwd.match(//d/) && passwd.match(//D/)) // [验证] 同时包含字母和数字  
+    {  
+        intScore = (intScore+2)  
+    } // [验证] 同时包含大写字母，小写字母，数字和特殊字符  
+    if (passwd.match(/[a-z]/) && passwd.match(/[A-Z]/) && passwd.match(//d/) && passwd.match(/[!,@#$%^&*?_~]/))  
+    {  
+        intScore = (intScore+2)  
+    }  
+    return intScore;  
+}  
+
+loudjam:
+密码强度结构：
+<div class="password-strength">
+                        <label class="password-strength-pic" id="password-strength-pic">
+                            <span class="img password-strength-pic-2"></span>
+							<span class="img password-strength-pic-2"></span>
+							<span class="img password-strength-pic-2"></span>
+                        </label>
+                        <label class="password-strength-text" id="password-strength-text">强度弱：试试字母、数字、标点混搭</label>
+                    </div>
+
+js:
+
+window.Jason = {
+	//public acitions method
+	actions: {
+		addHandler: function(element, type, handler) {
+			//element.innerHTML = '';
+			if (element.addEventListener) {
+				element.addEventListener(type, handler, false);
+			} else if (element.attachEvent) {
+				element.attachEvent('on' + type, handler);
+			} else {
+				element['on' + type] = handler;
+			};
+		},
+		createElement: function(tagName, value, target, text) {
+			var option = document.createElement(tagName);
+			option.setAttribute("value", value);
+			if (text !== undefined) {
+				option.appendChild(document.createTextNode(text));
+			}
+			target.appendChild(option);
+		}
+	},
+	/************
+	 *describe:Check input,then show or hide information
+	 *author：Jason
+	 *name:checkFormInput
+	 *argunments:（input:元素-输入框、span:元素-显示提示、inputValue文本-需要验证的文本）
+	 */
+	checkFormInput: function(input, span, inputValue) {
+		//test
+		var inputValue = inputValue || "";
+		if ((input.nodeName && input.nodeName.toLowerCase() !== "input") || (span.nodeName && span.nodeName.toLowerCase() !== "span") || typeof inputValue !== "string") {
+			return false;
+		}
+		var actions = {
+			keyup: function() {
+				if (input.value === inputValue) {
+					span.style.display = "inline";
+				} else {
+					span.style.display = "none";
+				}
+
+			},
+			focus: function() {
+				if (input.value === inputValue) {
+					input.value = "";
+					span.style.display = "none";
+				}
+			},
+			blur: function() {
+				if (input.value === "") {
+					input.value = inputValue;
+					span.style.display = "inline";
+				} else {
+					span.style.display = "none";
+				}
+			}
+		};
+		//init
+		input.value = inputValue;
+		this.actions.addHandler(input, "keyup", actions.keyup);
+		this.actions.addHandler(input, "blur", actions.blur);
+		this.actions.addHandler(input, "focus", actions.focus);
+	},
+	/*******
+	 *describe:Check password,show strength of it
+	 *author：Jason
+	 	<?php echo date("Y",time())?>
+		<?php echo date("m",time())?>
+		<?php echo date("d",time())?>
+	 *name:checkPassword
+	 *argunments:（input:password:元素-输入框、show:元素-强度图片组）
+	 */
+	checkPassword: function(input, show, text) {
+		var showGroup = show.getElementsByTagName("span");
+		var actions = {
+			blur: function() {
+				var num = /[0-9]/;         //密码是0到9的数字
+				var letter = /[a-zA-Z]/;   //密码是大小写字母
+				var punctuation = /[\,\.\-\~\!\@\#\$\%\^\&\*\_\+\=\-\;\:\'\"\?\/\\]/;  //密码是标点符号。  \表示转义字符，eg:\,把单引号转义
+				var strength = 0;   //密码强度的长度
+				var className;
+				if (num.test(input.value)) {   //检测输入值是否为数字
+					strength = strength + 1;
+				}
+				if (letter.test(input.value)) {  //检测输入值是否为数字
+					strength = strength + 1;
+				}
+				if (punctuation.test(input.value)) {   //检测输入值是否为特殊字符
+					strength = strength + 1;
+				}
+				if (input.value.length < 6) {
+					strength = 0;
+				}
+				if (strength > 0) {
+					for (var i = 0; i < strength; i++) {
+						className = showGroup[i].className.replace("password-strength-pic-2", "password-strength-pic-1");
+						showGroup[i].className = className;
+					}
+				}
+				for (var j = strength; j < 3; j++) {
+					className = showGroup[j].className.replace("password-strength-pic-1", "password-strength-pic-2");
+					showGroup[j].className = className;
+				}
+				switch (strength) {
+					case 3:
+						text.innerHTML = "强度强";
+						break;
+					case 2:
+						text.innerHTML = "强度中：试试字母 、数字、标点混搭";
+						break;
+					case 1:
+						text.innerHTML = "强度弱：试试字母 、数字、标点混搭";
+						break;
+					case 0:
+						text.innerHTML = "强度无：请输入六个以上字符";
+						break;
+					default:
+						break;
+				}
+			}
+		};
+		this.actions.addHandler(input, "blur", actions.blur);
+	},
+	/*******
+	 *describe:add a birthday plugin
+	 *author：Jason
+	 *name:addBirthday
+	 *argunments:（year:元素-select框、month:元素-select框、day:元素-select框）
+	 */
+	addBirthday: function(year, month, day) {
+		var tYear = year.getAttribute("data_id")*1;
+		var tMonth = month.getAttribute("data_id")*1;
+		var tDay = day.getAttribute("data_id")*1;
+		if ((!year.tagName || year.tagName.toLowerCase() !== "select") || (!month.tagName || month.tagName.toLowerCase() !== "select") || (!day.tagName || day.tagName.toLowerCase() !== "select")) {
+			return;
+		}
+		var len = year.options.length,
+			i,
+			years = tYear,
+			months = tMonth,
+			days = tDay;
+		var actions = {
+			addMonths: function() {
+				if (!year.selectedIndex) {
+					if (month.options && month.options.length && month.options.length > 0) {
+						month.options.length = 0;
+					}
+					if (day.options && day.options.length && day.options.length > 0) {
+						day.options.length = 0;
+					}
+					return;
+				}
+				month.options.length = 0;
+				day.options.length = 0;
+				var selectedYear = year.options[year.selectedIndex].value,
+					maxMonth = 12,
+					i;
+				if (parseInt(selectedYear) === years) {
+					maxMonth = months;
+				}
+				Jason.actions.createElement("option", -1, month, "请选择");
+				for (i = 1; i <= maxMonth; i++) {
+                    Jason.actions.createElement("option", i, month, i);
+					if ((parseInt(jQuery("select#month").attr("data")))==i) {
+                        jQuery('select#month').val(i);
+                    }
+			}
+			},
+			addDays: function() {
+				if (!year.selectedIndex || !month.selectedIndex) {
+					if (day.options && day.options.length && day.options.length > 0) {
+						day.options.length = 0;
+					}
+					return;
+				}
+				day.options.length = 0;
+				var selectedYear = year.options[year.selectedIndex].value,
+					selectedMonth = month.options[month.selectedIndex].value,
+					maxDay,
+					i;
+				switch (parseInt(selectedMonth)) {
+					case 1:
+					case 3:
+					case 5:
+					case 7:
+					case 8:
+					case 10:
+					case 12:
+						maxDay = 31;
+						break;
+					case 4:
+					case 6:
+					case 9:
+					case 11:
+						maxDay = 30;
+						break;
+					case 2:
+						maxDay = 28;
+						if ((selectedYear % 4 === 0) && (selectedYear % 100 !== 0) || (selectedYear % 400 === 0)) {
+							maxDay = 29;
+						}
+						break;
+					default:
+						break;
+				}
+				if (parseInt(selectedYear) === years && parseInt(selectedMonth) === months) {
+					maxDay = days;
+				}
+				Jason.actions.createElement("option", -1, day, "请选择");
+				for (i = 1; i <= maxDay; i++) {
+					Jason.actions.createElement("option", i, day, i);
+                    if ((parseInt(jQuery("select#day").attr("data")))==i) {
+                        jQuery('select#day').val(i);
+                    }
+				}
+			},
+			submit: function(e) {
+				if (e.preventDefault) {
+					e.preventDefault();
+				} else {
+					window.event.returnValue = false;
+				}
+			}
+
+		};
+		
+		Jason.actions.createElement("option", -1, year, "请选择");
+		for (i = years; i >=1950 ; i--) {
+			Jason.actions.createElement("option", i, year, i);
+            /**
+             * Populate birthday when there is "data" metadata about the birthday in the form
+             */
+            if ((parseInt(jQuery("select#year").attr("data")))==i) {
+
+                /**
+                 *  set the year to the corresponding value
+                 */
+                jQuery('select#year').val(i);
+
+                /**
+                 * Call the month and year population methods (and set them to the corresponding value, see in those methods how)
+                 */
+                actions.addMonths();
+                actions.addDays();
+
+                /**
+                 * By remove the data attributes from the selects, this part think as them as new ones, so this part won't fired anymore (e.g. just once)
+                 */
+                jQuery("select#year").removeAttr("data");
+                jQuery("select#month").removeAttr("data");
+                jQuery("select#day").removeAttr("data");
+
+                /**
+                 * And finally, set the value of $("input#full") to 'yyyy-mm-dd' like we just have finished selecting the date.
+                 */
+                jQuery("input#full").val(jQuery('select#year').val()+'-'+jQuery('select#month').val()+'-'+jQuery('select#day').val());
+
+            }
+		}
+		Jason.actions.addHandler(year, "change", actions.addMonths);
+		Jason.actions.addHandler(month, "change", actions.addDays);
+		/*actions.addMonths();
+						actions.addDays();*/
+	},
+	/*******
+	 *describe:add a birthday plugin
+	 *author：Jason
+	 *name:checkBirthday
+	 *argunments:（form:元素-form表单、day:元素-生日select天对应框、span:元素-span提示模块）
+	 */
+	checkBirthday: function(form, day, span) {
+		if ((!day.tagName || day.tagName.toLowerCase() !== "select") || (!span.tagName || span.tagName.toLowerCase() !== "span")) {
+			return;
+		}
+		var actions = {
+			submitForm: function(e) {
+				if (!day.tagName || day.tagName.toLowerCase() !== "select" || !day.options[day.selectedIndex]) {
+					span.style.display = "inline";
+				} else {
+					span.style.display = "none";
+				}
+			}
+		};
+		Jason.actions.addHandler(form, "submit", actions.submitForm);
+	}
+
+};
+
+<script>
+	
+jQuery(function ($){
+	(function (){
+		var acolors = $('#header .style-list');
+		var acolors_li = acolors[0].children;
+		var oSubmit_gary = document.getElementById('submit_gary');
+		var color_s;
+		//fn_color();
+		//for(var i=0;i<acolors_li.length;i++){
+		//	acolors_li[i].onclick = fn_color;
+		//}
+		//var oColor =  color_s || '#ffeb00';
+		
+		//function fn_color(){
+		//	var oCookie = $.cookie('choosed_interface');
+		//	if(oCookie=='choosed-interface-blue'){
+		//		color_s = '#03bfd8';
+		//	}else if(oCookie=='choosed-interface-yellow'){
+		//		color_s = '#ffeb00';
+		//	}else if(oCookie=='choosed-interface-pink'){
+		//		color_s = '#f3bb8f';
+		//	}else if(oCookie=='choosed-interface-purple'){
+		//		color_s = '#7860d2';
+		//	}
+		//	oColor =  color_s;
+		//	oSubmit_gary.style.background = oColor;
+		//};
+		/*已经处理*/
+		var oUser_agreement = document.getElementById('user_agreement');
+		var oForm_validate = document.getElementById('form-validate');
+		oUser_agreement.checked = true;
+		oSubmit_gary.type = 'submit';
+		oUser_agreement.onclick = function (){
+			if(oUser_agreement.checked == false){
+				oSubmit_gary.className = 'bg_gray';
+				oSubmit_gary.type = 'button';
+				oForm_validate.action = '';
+			}else{
+				oSubmit_gary.className = 'bg_change_color';
+				oSubmit_gary.type = 'submit';
+				oForm_validate.action = "http://loudjam.local.com/customer/account/createpost/";
+			}
+		}
+	})();
+
+	(function (){
+		var oRegister_username = document.getElementById("register-username-input");
+        
+        var oSubmit_gary = document.getElementById("submit_gary");
+		var oPassword = document.getElementById("password");
+		var oConfirmation = document.getElementById("confirmation");
+		var oSpan = oPassword.parentNode.getElementsByTagName('span')[0];
+		var oSpan1 = oConfirmation.parentNode.getElementsByTagName('span')[0];
+		var oMobile = document.getElementById("mobile");
+		var oSpan2 = document.getElementById("limit_length_moblie");
+		var oAdvice = document.getElementById("advice-validate-length-mobile");
+		//alert(oConfirmation);
+		
+		var arr = [];
+		var arr2 = [];
+		var oDiv;
+		var oDiv1;
+        
+        //判断密码的文本输入框为空提示
+        oSubmit_gary.onclick = function (){
+           if(oPassword.value == ''){
+              oSpan.children[1].innerHTML = "这是必填区域";
+			  oSpan1.children[1].innerHTML = "这是必填区域";
+			  oSpan2.children[1].innerHTML = "这是必填区域";
+              doMove(oSpan,{opacity:1});
+			  doMove(oSpan1,{opacity:1});
+			  doMove(oSpan2,{opacity:1});
+           }
+    
+        };
+		oPassword.onkeydown = function (ev){
+			doMove(oSpan,{opacity:0});
+			var oEvent = ev || event;
+			arr = oPassword.value.split("");
+			//禁止ctrl+v
+			if(oEvent.ctrlKey==1 && oEvent.keyCode==86){
+				return false;
+				oEvent.preventDefault();
+			}
+			//alert(oEvent.keyCode);
+			if(arr.length>9){
+				arr.length=9;
+				oPassword.value = arr.join("");
+				oSpan.children[1].innerHTML = "亲,你不能超过10位数";
+				doMove(oSpan,{opacity:1});
+				//aSpan[0].style.display = 'block';
+			}
+		};
+		oPassword.onkeyup = function (ev){
+			var oEvent = ev || event;
+			if(oEvent.keyCode==8){
+				if(arr.length<10){
+					doMove(oSpan,{opacity:0});
+				}
+			}
+		};
+		oConfirmation.onkeydown = function (ev){
+			doMove(oSpan1,{opacity:0});
+			//for(var i=0;i<oPassword.value.length;i++){
+				//arr3.push(oPassword.value.charAt(i));
+			//}
+			var oEvent = ev || event;
+			arr2 = oConfirmation.value.split("");
+			//禁止ctrl+v
+			if(oEvent.ctrlKey==1 && oEvent.keyCode==86){
+				return false;
+				oEvent.preventDefault();
+			}
+			//alert(oEvent.keyCode);
+			if(arr2.length>9){
+				arr2.length=9;
+				oConfirmation.value = arr2.join("");
+				oSpan1.children[1].innerHTML = "亲,你的长度不能大于10.";
+				doMove(oSpan1,{opacity:1});
+				//aSpan[0].style.dis
+			}
+			if(oPassword.value.length == 0){
+				oSpan1.children[1].innerHTML = '亲,请先输入上面的密码设置.';
+				doMove(oSpan1,{opacity:1});
+				
+				return false;
+			};
+		};
+		oConfirmation.onkeyup = function (ev){
+			var oEvent = ev || event;
+			if(oEvent.keyCode==8){
+				if(arr2.length<10){
+					doMove(oSpan1,{opacity:0});
+				}
+			}
+		};
+		oPassword.onblur = function (){
+			doMove(oSpan,{opacity:0});
+		};
+		oConfirmation.onblur = function (){
+			if(this.value<6 || this.value!=oPassword.value){
+				oSpan1.children[1].innerHTML = '亲,你输入有误';
+				doMove(oSpan1,{opacity:1});
+			}else{
+				doMove(oSpan1,{opacity:0});
+			}
+			
+		};
+	
+	var reg= /^(\+86)?1[34578]\d{9}$/g;
+	if(oAdvice){
+		jQuery(oAdvice).remove();
+	}
+	oMobile.onkeydwon = oMobile.onclick = function (){
+		doMove(oSpan2,{opacity:0});
+	}
+	oMobile.onblur =function(){
+		var ok = reg.test(oMobile.value);
+		if(oMobile.value.length==0){
+			//如果必填，请从新写；
+			oSpan2.children[1].innerHTML= "&nbsp;&nbsp;亲,你的格式有误.";
+			doMove(oSpan2,{opacity:1});
+		}else{
+			if(!ok){
+					oMobile.value = '';
+					oSpan2.children[1].innerHTML= "&nbsp;&nbsp;亲,你的格式有误.";
+					doMove(oSpan2,{opacity:1});
+				}else{
+					doMove(oSpan2,{opacity:0});
+					var telephone_code_button  =  document.getElementById('telephone-code-button');
+					var  coountSecond = 60;
+					var timer;
+					var ok = !ok;
+					var bOk = true;
+					telephone_code_button.onclick =function (){
+						var that = this;
+						//this.innerHTML = coountSecond + '秒后重新发送';
+						jQuery(function($){
+						if(bOk){
+							bOk = false;
+							var sms_url=sms_url||'/customer/ajax2/generateValidationCode';
+							 $.get(sms_url,{'phone':$('#mobile').val()},function(data){
+								 var oSuccess = data.success;
+								 var oCode = data.code;
+								if(oSuccess==1){
+									if(ok){
+										ok = !ok;
+										timer = setInterval(function (){
+											that.innerHTML = (coountSecond--)+'秒后重新发送';
+											if(coountSecond<=0){
+												clearInterval(timer);
+												that.innerHTML = "重新发送";
+												ok = !ok;
+												coountSecond=60;
+												bOk = true;
+											}
+										},1000);
+									}
+								}else if((oSuccess == 0) && (oCode == 1)){
+									if(ok){
+										ok = !ok;
+										timer = setInterval(function (){
+											that.innerHTML = (coountSecond--)+'秒后重新发送';
+											if(coountSecond<=0){
+												clearInterval(timer);
+												that.innerHTML = "重新发送";
+												ok = !ok;
+												coountSecond=60;
+												bOk = true;
+											}
+										},1000);
+									}
+								}else if((oSuccess == 0) && (oCode == 3)){
+									alert('您使用的号码已经在官网注册，请直接登录!');
+								}
+							 }, 'json');
+						 }
+						});
+					};
+				}
+		}
+		ok=!ok;
+	};
+	})();
+});	
+	//
+
+</script>
+
+
+
+
+
+
+jQuery(function($){
+	var _body = $('body,document,html');
+	if (_body.hasClass("cms-index-index")) {
+		var _animateTime = 100;
+		_body.on('click','.latest-activity-fix',function(){
+			_body.animate({'scrollTop': $('#latest-activity').offset().top-108}, _animateTime);
+		});
+		_body.on('click','.flash_sale-fix',function(){
+			_body.animate({'scrollTop': $('#flash-sale-banner').offset().top-108}, _animateTime);
+		});
+		_body.on('click','.recommended-fix',function(){
+			_body.animate({'scrollTop': $('#recommended').offset().top-108}, _animateTime);
+		});
+		_body.on('click','.recommended_news-fix',function(){
+			_body.animate({'scrollTop': $('#recommended_news').offset().top-108}, _animateTime);
+		});
+		_body.on('click','.member-fix',function(){
+			_body.animate({'scrollTop': $('#member').offset().top-108}, _animateTime);
+			});
+	}

@@ -1,0 +1,251 @@
+什么是正则表达式
+什么叫“正则”-规则、模式
+强大的字符串匹配工具(处理字符串)
+
+正则的写法
+
+1，var re=//;推荐使用，var re=/a/
+
+2,var re=new RegExp();var re=new RegExp(“a”)，//当正则需要传参的时候，一定要用全称的写法
+
+
+三，正则表达式常用方法：
+
+1，test  字符串判断，如果匹配成功返回true，如果匹配失败返回false
+
+写法：正则.test(字符串)
+
+2，search  字符串搜索，如果匹配成功返回出现的位置，如果匹配失败返回-1；
+
+写法：字符串.search(正则)
+
+正则默认区分大小写
+忽略大小写：i——ignore
+
+var str="adsfgB"
+var re=/B/i
+var re=new RegExp("B","i")
+
+3，match   获取匹配的项目,如果匹配成功返回数组,如果匹配失败返回null；
+
+写法：字符串.match(正则)
+
+正则默认找到一个就停止。
+
+量词：+  至少出现一次
+
+全局匹配：g—global
+
+例子：找出所有数字
+
+
+4，replace 替换所有匹配，返回替换后的字符串
+
+写法：字符串.replace(正则,想替换的值)
+
+正则中的"|"是“或”的意思
+
+var str="菲称仁爱礁附近17艘中国船均在菲军监视之下"
+var re = /菲称|中国船|监视之下/g;
+
+str.replace(re,'*');等价于下面
+str.replace(re,function(){
+	return "*"
+})
+
+str.replace(re,function(str){
+	return "*"
+}) 函数的第一个参数：就是匹配成功的字符
+
+例子：
+window.onload = function(){
+	var aT = document.getElementsByTagName('textarea');
+	var oInput = document.getElementById('input1');
+	
+	var re = /菲称|中国船|监视之下/g;
+	
+	oInput.onclick = function(){
+		
+		 //aT[1].value = aT[0].value.replace(re,'*');
+		 
+		 aT[1].value = aT[0].value.replace(re,function(str){
+		//函数的第一个参数：就是匹配成功的字符	 
+		
+			 //alert( str );
+			 
+			 var result = '';
+			 
+			 for(var i=0;i<str.length;i++){
+				 result += '*';
+			 }
+			 
+			 
+			 return result;
+			 
+		 });
+		
+	};
+	
+};
+
+四，知识点：匹配子项 : 小括号 ()  (还有另外一个意思，分组操作)
+
+例子：
+
+var str = '2013-6-7';
+
+var re = /(\d+)(-)/g;
+
+str = str.replace(re,function($0,$1,$2){
+	//第一个参数：$0（母亲）,第二个参数 : $1(第一个孩子)
+	//,第三个参数 : $1(第二个孩子)
+	
+	//alert( $2 );
+	
+	//return $1 + '.';
+	
+	return $0.substring(0,$0.length-1) + '.';
+	
+});
+
+alert( str );   //2013.6.7
+
+
+
+五，正则中的字符类：一组相似的元素  用 [] 来表示。中括号的整体代表一个字符
+
+var str = 'abdc';
+
+var re = /a[bde]c/;[bde]只能代表其中的一个,b或者d或者e
+
+1，任意字符[abc]
+例子：o[usb]t——obt、ost、out
+
+2，排除 : ^ 如果^写在[]里面的话，就代表排除的意思
+
+var str = 'abc';
+
+var re = /a[^bde]c/;[^bde]除去b,d,e其他的字符
+
+3，范围：[a-z]、[0-9]  顺序只能从小到大
+
+例子：id[0-9]——id0、id5
+
+
+六，转义字符
+
+\. 真正的点
+
+. 代表任意字符
+
+\d 数字
+
+\D 非数字
+
+\w 字符（字母，数字。下划线_）
+
+\W 非字符
+
+\s 空格
+
+\S 非空格
+
+\b 独立的部分  （起始，结束，空格）
+
+\B 非独立的部分
+
+var str = 'onetwo';
+var re = /\bone/; one中的o必须是独立的，在开始位置，满足
+var re = /one\b/; one中的e必须是独立的，不满足
+var re = /two\b/;two中的o必须是独立的在结尾，满足
+alert( re.test(str) )
+
+var str = 'one two';
+var re = /one\b/; one中的e必须是独立的，后面是空格，满足条件
+
+\1 : 重复的第一个子项
+\2 : 重复的第二个子项
+\3 : 重复的第三个子项
+\4 : 重复的第四个子项
+var str = 'abca';
+var re = /(a)(b)(c)\1/;alert( re.test(str) ) 真
+var re = /(a)(b)(c)\2/;alert( re.test(str) ) 假
+
+var re = /\w\w/;  ab,c9 都是正确的
+var re = /(\w)\1/; cc  99都是正确的，ab,c9 都是错误的
+
+例如：匹配<title>这是标题</title>
+
+简单的正则可以这样写：   <title>.*</title>
+
+可以通过分组简写表达式如下：<(title)>.*</\1>
+
+七，正则中的量词  {}
+
+{4,7}  : 最少出现4次，最多出现7次
+{4,} : 最少出现4次
+{4} : 正好出现4次
+
++ 等价于 {1,}   : 至少出现1次 //\d{1,}== \d+
+
+? 等价于 {0,1}  : 出现0次或者1次
+
+* 等价于 {0,}  	: 至少出现0次
+
++与*区别
+
+var str = 'ac';
+var re = /ab+/;false
+var re = /ab*/;true
+
+alert(re.test(str));
+
+八，正则的起始和结束
+
+^ : 正则的最开始位置，就代表起始的意思
+
+$ : 正则的最后位置 , 就代表结束的意思
+
+var re = /^[1-9]\d{4,11}$/;以1-9中的一个数起始。以4到11位数字结束
+
+
+
+
+var reg={
+			'汉字':/[\u4e00-\u95fa5]/,
+			'行首行尾空格':/^\s*|\s*$/,
+			'邮箱':/^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/,
+			'网址':/[a-zA-Z]+//[^\s]*/,
+			'QQ号':/[1-9][0-9]{4,9}/,
+			'邮政编码':/[1-9]\d{5}/,
+			'省份证':/[1-9]\d{14}|[1-9]\d{17}|[1-9]\d{16}x/
+		}
+
+
+
+
+正则表达式：特殊符号: ! $ ^ * + = | . ? \ / () [] {} 如果使用它们需要使用转义，例如\+, 等价于+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

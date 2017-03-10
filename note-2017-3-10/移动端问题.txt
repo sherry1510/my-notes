@@ -1,0 +1,20 @@
+QQ强制横屏或者竖屏显示（在x5内核横屏或者竖屏显示）
+<meta name="x5-orientation" content="portrait|landscape" />
+
+QQ设置全屏
+<meta name="x5-fullscreen" content="true" />
+
+UC强制竖屏或横屏显示
+<meta name="screen-orientation" content="portrait">
+
+UC全屏显示
+<meta name="full-screen" content="yes">
+
+禁止识别电话号码和邮箱的识别
+<meta name="format-detection" content="telephone=no, email=no" />
+
+拨打电话和发邮件
+href="tel:"
+href="mailto:"
+<a href="tel:18888888888">请拨打电话18888888888</a>
+<a href="mailto:motao@motao.com">请发送邮件</a>

@@ -1,0 +1,43 @@
+1、js实现input“增加”，“删除”功能 
+<table id="attfile">
+  <tr>
+    <td><input type="text" name="filename" size="20"></td>
+    <td align="left"><input type="file" name="file1" size="40"></td>
+    <td align="left">
+      &lt;<a href="javascript:delrows();">删除</a>&gt;
+      &lt;<a href="javascript:addrows();">继续增加</a>&gt;
+    </td>
+  </tr>
+</table>
+
+
+<script type="text/javascript">
+
+var attachfiles=1;        //附件的个数
+
+function delrows()
+{
+    //删除附件中的行
+    if(attachfiles>1)
+    {
+        attachfiles--;
+        attfile.deleteRow();
+    }
+}
+  function addrows()
+{
+    //给附件添加行
+    attachfiles++;
+    var mynewrow=attfile.insertRow();
+    col1=mynewrow.insertCell(0);
+    col2=mynewrow.insertCell(1);
+    col3=mynewrow.insertCell(2);
+
+    if(attachfiles<10){
+        col1.innerHTML="<td><input type=text name=filename size=20></td>";
+        col2.innerHTML="<td colspan=3><input type=file name=file1 size=40></td>";
+    }
+    if(attachfiles>20)
+    {        alert("不要太多呀！"); }
+}
+</script>

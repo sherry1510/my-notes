@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style type="text/css">
+body{ padding:150px 20px;}
+span{ font-size:100px; color:#06F; font-family:"微软雅黑"; position:relative;}
+.zi:before,.zi:after{ position:absolute; left:0; top:0; content:attr(data-zi); transform-origin:left center; transition:all 0.25s linear 0s;}
+.zi:before{ color:#fff; z-index:2; transform: rotatex(0) rotateY(15deg) rotateZ(0);}
+.zi:after{ color:rgba(0,0,0,0.5); z-index:1; transform:scale(1.02,1)}
+.zi:hover:after{transform:scale(1.02,1) rotatex(0) rotateY(-30deg) rotateZ(0) skew(0,10deg);}
+.zi:hover:before{ transform: rotatex(0) rotateY(-40deg) rotateZ(0) skew(0,3deg);}
+</style>
+</head>
+
+<body>
+<span class="zi" data-zi="上">上</span>
+<span class="zi" data-zi="海">海</span>
+<span class="zi" data-zi="九">九</span>
+<span class="zi" data-zi="期">期</span>
+<span class="zi" data-zi="毕">毕</span>
+<span class="zi" data-zi="业">业</span>
+<span class="zi" data-zi="快">快</span>
+<span class="zi" data-zi="乐">乐</span>
+</body>
+</html>

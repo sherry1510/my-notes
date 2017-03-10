@@ -1,0 +1,338 @@
+热区工具：
+http://www.mtmao.com/hot
+
+
+共享：
+\\10.1.6.66\网站部\UED\UED--UI&Creative\2016\专题
+
+boss 用于后台管理 
+地址 boss.yesmynet.com
+用户名 sherry_yan 
+密码 moushi123 
+
+svn 用于程序中的css和js管理 
+地址 https://10.1.6.110:8443/svn/yesmywine-css/branches 
+用户名 sherry_yan 
+密码 moushi123 
+
+hudson 程序中的css和js发布上线 
+地址 http://10.1.6.26:8080/view/css/ 
+用户名 sherry_yan 
+密码 moushi123
+
+
+网宿CDN账号 
+http://myview.chinanetcenter.com/cp/purge.action#0 
+Username: yesmywine 
+Password:Yesmywine0821 
+
+
+ftp:
+css路径：/opt/img_wine/page_images/newWeb/css/cms/
+
+js路径：/opt/img_wine/page_images/newWeb/js/cms/
+
+images路径：/opt/img_wine/page_images/images/event/2015/
+
+
+
+
+SFTP帐号（正式主站） 
+主站：61.152.249.170 
+端口：4322 
+用户：wineimg 
+密码：moushi123 
+
+
+禅道：
+http://10.1.6.194:88/zentao/product-browse-16.html
+用户名 sherry_yan 
+密码 moushi123
+
+fiddler:
+EXACT:后面为文件的链接
+
+
+js
+http://ym.folai.com/help/ym/index.html
+
+css规范
+http://ym.folai.com/help/style/index.html
+
+js速查表
+http://ym.folai.com/help/ym/cheatsheet.html
+
+http://img13.yesmyimg.com/images/event/2016/01/0110320/0110320_sub.png
+
+产品图片：
+<a href="http://www.yesmywine.com/goods/6203731.html" target="_blank">
+	<img onerror="onerror=null;src='http://img18.yesmyimg.com/def/110x180.jpg'" src="http://img14.yesmyimg.com/images/event/2016/01/0110320/seckill4.png" />
+</a>
+
+加入购物车：
+
+<a class="btn-buy btn1" href="http://www.yesmywine.com/goods/5189423.html"></a>
+
+
+倒计时：
+<li data-end="2016-1-13 12:00:00" class="time1 time"> 
+<!--倒计时--> 
+<span style="font-size:20px; display:block; margin-top:15px;">本次活动结束还有</span> 
+<strong class="tcd-d" >0</strong>天 
+<strong class="tcd-h" >00</strong>时 
+<strong class="tcd-m" >00</strong>分 
+</li>
+
+
+//倒计时		
+$('.time').bindYMUI('CountDown', {
+		callback: function(elm) {
+		//YM.page.alert('倒计时已经结束');
+		}
+});
+
+js:
+排序
+var i =4; 
+$('#section2 .prodlist li').each(function(){ 
+$(this).prepend('<span class="icon">'+i+'</span>') 
+i++; 
+})
+
+
+活动规则：
+
+$('.ruler_btn1').click( function(){ 
+YM.page.dialog.ajax({title:'活动规则', url:'http://www.yesmywine.com/inc2/section/content.jsp?key=RULE_0110106', width:800, height:300}); 
+return false; 
+});
+
+
+
+排行榜：
+
+//排行榜 
+YM.page.special.rank=function(){ 
+YM.dataproxy.getJSON('http://www.yesmywine.com//marketing/getOrderTopV2.jspa?code=s12&type=0&_='+new Date().getTime(), function(d){ 
+$('#rank ul').html(''); 
+//var $str = "<li><span class='no'>第1名</span><span class='name'>tes63.com</span><span class='sale'>4354元</span></li><li><span class='no'>第2名</span><span class='name'>tes.com</span><span class='sale'>434元</span></li><li><span class='no'>第3名</span><span class='name'>test@</span><span class='sale'>43254元</span></li><li><span class='no'>第4名</span><span class='name'>tes.com</span><span class='sale'>434元</span></li><li><span class='no'>第5名</span><span class='name'>tes.com</span><span class='sale'>434元</span></li>"; 
+// $('#rank ul').append($str); 
+var s = 0; 
+/* var arr = new Array(); 
+for (var i=0; i<d.result.length; i++) { 
+
+arr.push(new Line(d.result[i].NAME,d.result[i].AMOUNT)); 
+} 
+arr.push(new Line(' 残照大叔 ',106890)); 
+arr.push(new Line('以梦为马',148912)); 
+arr.push(new Line('Sunshine℃',131580)); 
+
+arr.sort(function(a,b){return a.amount<b.amount?1:-1});//从大到小排序*/ 
+//alert(d.length); 
+if (d.result && d.result.length>0) { 
+var tmpl =''; 
+//$('#rank ul').prepend('<li style="border:none"><span class"no">排名</span><span class="name">会员</span><span class="sale">总消费</span></li>') 
+
+for (var i=0; i<d.result.length; i++) { 
+s++ 
+if(i>=5){return}; 
+//$('#rank ul').append('<li><span class="no">'+s+'</span><span class="name" title="'+arr[i].name+'">'+arr[i].name+'</span><span class="sale">'+arr[i].amount+'元</span></li>'); 
+$('#rank ul').append('<li><span class="number no">第'+s+'名</span><span class="name" title="'+d.result[i].NAME+'">'+d.result[i].NAME+'</span><span class="money sale">'+d.result[i].AMOUNT+'元</span></li>'); 
+}; 
+
+}else { 
+$('#rank ul').html('暂无记录'); 
+} 
+
+}); 
+};
+
+<div id="rank"> 
+<ul> 
+
+</ul> 
+</div>
+
+
+
+获奖名单实时播报：
+YM.page.special.notice = function(){
+		YM.dataproxy.getJSON('http://www.yesmywine.com/springFestivalCrm/getPrizeInfoList.jspa?promotionId=37411&num=100' ,function(d){
+			
+			//alert(d.list[0].name)
+			$.each(d.list, function(i, str){
+				$('.rank').prepend('<li>' + '恭喜' + d.list[i].name+',获得'+d.list[i].goodsName + '</li>');
+				i++;
+			});
+		}); 
+		function slide(){
+		$('.rank').animate({top: '-50px'},2000,function(){
+			//$('.notice ul li:first').appendTo('.notice ul')
+			$('.rank').append($('.rank li:first')).css('top','0');
+			});
+			//alert($('.notice ul li:last').html())
+	}
+	setInterval(slide,2000)
+	
+		
+	}
+
+	YM.page.special.notice();
+
+<ul class="rank"></ul>   position:absolute;
+
+
+
+//领券
+$('.lq').click(function() {					
+						YM.login.pop(function() {
+							showRandWin('我要领券', function(rand) {
+								YM.dataproxy.getJSON(YM.login.servicePath +'marketing/lottery-lottery.jspa?code=xincundacudi2b&rand='+ rand, function(d) {
+									YM.page.closeDialog();                                //说明：xincundacudi2b需要改
+									if (d.op=='succ') {
+										YM.page.alert(d.msg);
+									} else {							
+										YM.page.alert(d.msg);
+									}						
+								});
+							});
+						});
+						return false;
+		});
+	var showRandWin = function(title, callback) {
+	YM.page.dialog({ title:title, content:randTmpl.format(new Date().getTime(), title), width:500, height:180, callback:function() {
+	var randElm = YM.util.dialog.container.find('input.txt-rand');
+	YM.util.dialog.container.find('.btn-refreshrand').click(function() {
+		$(this).prev().attr('src', 'http://www.yesmywine.com/random/rand.jspa?'+ new Date().getTime());
+		return false;
+	});
+	YM.util.dialog.container.find('.btn-postrand').click(function() {
+		if (randElm.val().trim()=='') {
+			randElm.focus();
+			return false;
+		}
+		callback(randElm.val().trim());
+			return false;
+		});
+	}});
+};
+var randTmpl = [
+	'<div class="p20"><div style="padding:10px 30px;font-size:14px;line-height:20px;">',
+	'<p class="mb10" style="color:#333;">为了维护您的会员权益，防止恶意作弊，<br/>请先输入验证码</p>',
+	'<p class="mb10">',
+	'<input type="text" class="txt-rand" style="height:20px;line-height:20px;border:solid 1px #ccc;width:120px;" />',
+	'<img src="http://www.yesmywine.com/random/rand.jspa?{0}" width="85" height="20" align="absmiddle" style="margin:0 10px;" alt="验证码" />',
+	'<a href="#" class="btn-refreshrand" style="color:#06c;font-size:12px;">看不清，换一张</a>',
+	'</p>',
+	'<p><a href="#" class="btn btn-action btn-postrand"><em>{1}</em></a></p>',
+	'</div></div>'
+].join(''); 
+
+
+点击弹出已抢完：
+$('#lq2,#lq3').click(function(){
+	YM.page.alert('已抢完');
+	})
+
+
+插入价格：
+结构：
+<li id="6222800">
+	<a href="http://www.yesmywine.com/goods/6222800.html" target="_blank">
+		<img onerror="onerror=null;src='http://img18.yesmyimg.com/def/110x180.jpg'"  src="http://img11.yesmyimg.com/newWeb/images/global/1px.gif" realSrc="http://img14.yesmyimg.com/images/event/2016/01/0110330/0110330area01_prod08.jpg?"/>
+	</a>
+	<div class="mainPrice">
+		<div class="lowprice"><strong></strong></div>
+	</div>
+</li>
+
+js:
+var ids =[6222800,6223322,6217896,6222631,6221328,6210668];
+		for(var i=0,len=ids.length;i<len;i++){
+			$('#'+ids[i]+' .lowprice strong').html('<em style="font-size:14px">￥</em>'+Number(/\d+/gim.exec($('#good'+ids[i]+' .minprice').html()))); //最低价
+		}
+或者：
+var ids4 =[5187914,6222446,6214739,6221075,6203490,5197537,5179513,6217900,5193561,6207408,6221075,6211108,6214660,5200647,5200130,5171861,6210648];
+		for(var i=0,len=ids4.length;i<len;i++){
+			$('#'+ids4[i]+' .lowprice strong').html(Number(/\d+/gim.exec($('#good'+ids4[i]+' .minprice').html()))+'<em style="font-size:14px">/支</em>'); //最低价
+		}
+
+
+
+//左悬浮
+<div id="floatTool1" >
+
+        
+   		<a href="http://www.yesmywine.com/marketing/topic/0110363/0110363.html" style="margin-top:144px;" target="_blank"></a>
+        <a href="http://www.yesmywine.com/cms/cmsV1/grandcru/gccshop" target="_blank"></a>
+        <a href="http://www.yesmywine.com/marketing/topic/0110366/0110366.html" target="_blank"></a>
+        <a href="http://www.yesmywine.com/marketing/topic/0110290/0110290.html" target="_blank"></a>
+        <a href="http://www.yesmywine.com/marketing/topic/0110362/0110362.html" target="_blank"></a>
+        <a href="http://www.yesmywine.com/marketing/topic/0110292/0110292.html" target="_blank"></a>
+        <a href="http://www.yesmywine.com/marketing/topic/0110201/0110201.html" target="_blank"></a>
+        <a href="http://www.yesmywine.com/marketing/topic/0110323/0110323.html" target="_blank"></a>
+        <a href="http://www.yesmywine.com/marketing/topic/0110320/0110320.html" target="_blank" style="height:31px;"></a>
+        <a href="http://www.yesmywine.com/marketing/topic/0110205/0110205.html" target="_blank" style="height:31px;"></a>
+        <a href="http://www.yesmywine.com/marketing/topic/0110340/0110340.html" target="_blank" style="height:31px;"></a>
+    </div>
+
+/* floatTool */
+#floatTool1 {position:absolute;left:1%;padding-top:0;display: block; width:160px; height:652px;background:url(http://img14.yesmyimg.com/images/event/2016/01/0110361/0110361leftfloat.png?2) no-repeat; overflow:hidden; z-index:99;}
+#floatTool1 a{ width:129px; height:29px; margin-left:14px; line-height:29px; vertical-align:middle; display:block; color:#fff; text-decoration:none; text-indent:0; font-weight:bold;cursor: pointer;}
+#floatTool1 a.w{height: 44px;}
+
+
+
+//左右滚动start
+
+
+// 底部左右滚动
+$num = $('#section11 li').length; // 需要滚动产品总数量
+$width = $('#section11 li').width() + 14; //每个产品的宽度
+$('#section11 ul').width($num * 214); //设置ul的总宽度
+var $scroll_num = 4; //设置滚动个数
+var cur = 0;
+function autoRun(){ //自动滚动函数
+	cur++;
+	var curMax = Math.ceil($num/$scroll_num);
+	if (cur == curMax){ // 滚动到尾部后重新开始
+		cur = 0;
+	}
+	var left = cur * $width * (-$scroll_num);
+	$('#section11 ul').animate({
+		left:left
+	},500);
+}
+var timer = setInterval(autoRun,5000); //设置定时器，每隔一段时间滚动一次
+$('#section11').mouseover(function(){ // 鼠标悬停，暂停滚动
+	$('#section11 ul').stop();
+	clearInterval(timer);
+});
+$('#section11').mouseout(function(){ // 鼠标移走，滚动继续
+	timer = setInterval(autoRun,5000); 
+});
+
+//点击左右按钮滚动效果
+$('#prod01 .arrow_left').bind('click',function(){
+	$('#section11 ul').stop().animate({left:'0px'});
+});
+$('#prod01 .arrow_right').bind('click',function(){
+	$('#section11 ul').stop().animate({left:'-856px'});
+});
+
+
+//左右滚动end
+
+
+
+border="0" usemap="#Map5"
+<map name="Map5" id="Map5">
+        <area shape="rect" coords="3,8,124,49" href="#tab1" />
+        <area shape="rect" coords="132,9,246,45" href="#tab2" />
+        <area shape="rect" coords="255,8,369,47" href="#tab3" />
+        <area shape="rect" coords="378,7,493,46" href="#tab4" />
+        <area shape="rect" coords="500,10,621,45" href="#tab5" />
+        <area shape="rect" coords="628,10,741,45" href="#tab6" />
+        <area shape="rect" coords="752,11,866,47" href="#tab7" />
+        <area shape="rect" coords="876,9,992,45" href="#tab8" />
+      </map>

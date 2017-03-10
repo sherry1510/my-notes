@@ -1,0 +1,21 @@
+has(selector):匹配含有选择器所匹配的元素的元素
+例如：
+给所有包含 p 元素的 div 元素添加一个 text 类
+<div><p>Hello</p></div>
+<div>Hello again!</div>
+
+$("div:has(p)").addClass("test");
+
+结果：<div class="test"><p>Hello</p></div>
+
+contains(text) :匹配包含给定文本的元素
+例：
+<div>John Resig</div>
+<div>George Martin</div>
+<div>Malcom John Sinclair</div>
+
+查找所有包含 "John" 的 div 元素
+$("div:contains('John')")
+
+结果：
+<div>John Resig</div>, <div>Malcom John Sinclair</div>
